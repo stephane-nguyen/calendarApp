@@ -1,15 +1,14 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Calendar } from "react-big-calendar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import './App.css';
-import AddUserComponent from './components/add/AddUserComponent';
-import UserListComponent from './components/UserListComponent';
+import "./App.css";
+import AddUserComponent from "./components/add/AddUserComponent";
+import UserListComponent from "./components/UserListComponent";
 
-import Navbar from './Navbar';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import NotFoundPage from './pages/NotFoundPage';
-
-
+import Navbar from "./Navbar";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
