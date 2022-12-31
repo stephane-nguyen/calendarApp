@@ -1,25 +1,24 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
-import './App.css';
-import AddUserComponent from './components/add/AddUserComponent';
-import { Layout } from './components/Layout';
-import UserListComponent from './components/UserListComponent';
+import "./App.css";
+import AddUserComponent from "./components/add/AddUserComponent";
+import { Layout } from "./components/Layout";
+import UserListComponent from "./components/UserListComponent";
 
-import Navbar from './Navbar';
-import LoginPage from './pages/LoginPage';
-import Home from './components/Home';
-import RequireAuth from './components/RequireAuth';
-import NotFound from './components/NotFound';
-import Unauthorized from './components/Unauthorized';
+import Navbar from "./Navbar";
+import LoginPage from "./pages/LoginPage";
+import Home from "./components/Home";
+import RequireAuth from "./components/RequireAuth";
+import NotFound from "./components/NotFound";
+import Unauthorized from "./components/Unauthorized";
 
 const ROLES = {
-  'Student': 2000,
-  'Teacher': 1900
-}
+  Student: 2000,
+  Teacher: 1900,
+};
 
 function App() {
   return (
-    
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public/student routes */}
@@ -37,7 +36,6 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
-
   );
 }
 
