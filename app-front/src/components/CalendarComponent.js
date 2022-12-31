@@ -116,11 +116,11 @@ const CalendarComponent = () => {
           </div>
         </div>
       </div>
-      <div class="form-inline">
+      <div className="form-inline">
         <form>
           <input
             type="text"
-            class="form-control mr-2"
+            className="form-control mr-2"
             placeholder="Add title"
             value={newEvent.title}
             onChange={(e) =>
@@ -131,11 +131,11 @@ const CalendarComponent = () => {
       </div>
       <div className="container mt-1">
         <h2 className="text-center">List of events</h2>
-        <Link to="/add-user" className="btn btn-primary mb-2">
+        <Link to="/add-event" className="btn btn-primary mb-2">
           {" "}
           Add Event
         </Link>
-        <table className="table table-bordered table-striped">
+        {/* <table className="table table-bordered table-striped">
           <thead>
             <tr>
               <th>Title</th>
@@ -145,13 +145,13 @@ const CalendarComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {allEvents.map((user) => (
-              <tr key={user.idUser}>
-                <td>{user.title}</td>
-                <td>{user.firstname}</td>
-                <td>{user.lastname}</td>
+            {allEvents.map((event) => (
+              <tr key={event.id}>
+                <td>{event.title}</td>
+                <td>{event.start}</td>
+                <td>{event.end}</td>
                 <td>
-                  <Link to={`/user/${user.idUser}`}>
+                  <Link to={`/event/${event.id}`}>
                     <button className="btn btn-primary">
                       <i className="fas fa-edit" /> Edit
                     </button>
@@ -160,7 +160,7 @@ const CalendarComponent = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
       </div>
     </>
   );

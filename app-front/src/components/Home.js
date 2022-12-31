@@ -1,7 +1,10 @@
 import CalendarComponent from "../components/CalendarComponent";
-
 const Home = () => {
-  return <CalendarComponent />;
+  return (
+    <>
+      <CalendarComponent />
+    </>
+  );
 };
 
 export default Home;

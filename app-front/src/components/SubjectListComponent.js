@@ -9,6 +9,8 @@ const SubjectListComponent = () => {
   const [editSubjectname, setEditSubjectname] = useState("");
   const navigate = useNavigate();
 
+  /* CRUD */
+
   useEffect(() => {
     const getAllSubjects = async () => {
       try {
@@ -41,7 +43,7 @@ const SubjectListComponent = () => {
     }
   };
 
-  const handleEdit = async (id) => {
+  const editSubject = async (id) => {
     const updatedSubject = { id, nameSubject: editSubjectname };
     try {
       const response = await api.put(`/subject/${id}`, updatedSubject);
@@ -58,7 +60,7 @@ const SubjectListComponent = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const deleteSubject = async (id) => {
     try {
       await api.delete(`subject/${id}`);
       const subjectList = subjects.filter((subject) => subject.id !== id);

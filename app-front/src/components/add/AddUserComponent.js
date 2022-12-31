@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserService from "../../services/UserService";
 
 const AddUserComponent = () => {
   const [firstname, setFirstname] = useState("");
@@ -10,18 +9,18 @@ const AddUserComponent = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const saveUser = (e) => {
-    e.preventDefault();
-    const user = { firstname, lastname, email };
-    UserService.addUser(user)
-      .then((response) => {
-        console.log(response.data);
-        navigate("/user");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const saveUser = (e) => {
+  //   e.preventDefault();
+  //   const user = { firstname, lastname, email };
+
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       navigate("/user");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return (
     <div>
@@ -74,7 +73,7 @@ const AddUserComponent = () => {
                   </div>
                   <button
                     className="btn btn-success btn-block"
-                    onClick={(e) => saveUser(e)}
+                    // onClick={(e) => saveUser(e)}
                   >
                     Save
                   </button>

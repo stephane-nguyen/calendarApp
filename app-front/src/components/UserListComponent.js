@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import UserService from "../services/UserService";
 
 import { Link } from "react-router-dom";
 
 const UserListComponent = () => {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    UserService.getAllUsers()
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   UserService.getAllUsers()
+  //     .then((response) => {
+  //       setUsers(response.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <div className="container">

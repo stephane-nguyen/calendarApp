@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import useUser from "./hooks/useUser";
+import useUser from "../hooks/useUser";
 
 const Navbar = () => {
   const { user } = useUser();
