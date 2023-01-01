@@ -5,7 +5,7 @@ const Navbar = () => {
   const { user } = useUser();
   const navigate = useNavigate();
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg">
       <button
         className="navbar-toggler"
         type="button"
@@ -20,31 +20,27 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">
+              <img src="cytech_logo.png" alt="icon" />
+            </Link>
           </li>
           <li>
-            <Link to="/user">User</Link>
+            <Link to="/user">Students</Link>
+          </li>
+          <li>
+            <Link to="/supervisor">Supervisors</Link>
           </li>
         </ul>
       </div>
-
-      <div className="nav-right">
+      <div className="navbar-right">
         {user ? (
-          <button
-            onClick={() => {
-              //logout
-            }}
-          >
-            Log out
-          </button>
+          <Link to="/">
+            <i className="fas fa-sign-out-alt fa-2x"></i>
+          </Link>
         ) : (
-          <button
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Log in
-          </button>
+          <Link to="/login">
+            <i className="fas fa-user-circle fa-2x"></i>
+          </Link>
         )}
       </div>
     </nav>

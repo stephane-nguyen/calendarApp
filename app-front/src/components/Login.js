@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 
-import axios from "../api/axios";
+import api from "../api/baseURL";
 const LOGIN_URL = "/login";
 
 export default function Login() {
@@ -33,7 +33,7 @@ export default function Login() {
     //avoid behavior of form = avoid reloading page
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await api.post(
         LOGIN_URL,
         JSON.stringify({ email, password }),
         {
