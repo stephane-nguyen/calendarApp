@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 
 const Navbar = () => {
   const { user } = useUser();
-  const navigate = useNavigate();
+
   return (
     <nav className="navbar navbar-expand-lg">
       <button
@@ -29,6 +29,12 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/supervisor">Supervisors</Link>
+          </li>
+          <li>
+            <Link to="/subject">Subjects</Link>
+          </li>
+          <li>
+            <Link to="/speciality">Specialities</Link>
           </li>
         </ul>
       </div>

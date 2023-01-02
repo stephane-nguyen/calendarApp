@@ -78,7 +78,7 @@ const AddUserComponent = () => {
                     Save
                   </button>
                   <Link to="/user">
-                    <button className="btn btn-danger btn-block">Cancel</button>
+                    <button className="btn btn-danger btn-block mt-1">Cancel</button>
                   </Link>
                 </form>
               </div>
