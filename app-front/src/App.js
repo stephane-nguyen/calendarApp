@@ -10,6 +10,7 @@ import RequireAuth from "./components/RequireAuth";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login";
 import Unauthorized from "./components/Unauthorized";
+import SubjectList from "./components/SubjectList";
 
 const ROLES = {
   Student: 2000,
@@ -29,6 +30,7 @@ function App() {
         {/* <Route element={<RequireAuth allowedRoles={[ROLES.Teacher]} />}> */}
         <Route path="/user" element={<UserListComponent />} />
         <Route path="/add-user" element={<AddUserComponent />} />
+        <Route path="/subject" element={<SubjectList />} />
         {/* </Route> */}
 
         {/* catch all path */}
