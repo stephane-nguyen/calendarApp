@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import AddUserComponent from "./components/add/AddUserComponent";
+import AddUser from "./components/add/AddUser";
 import { Layout } from "./components/Layout";
 import UserListComponent from "./components/UserListComponent";
 
@@ -10,7 +10,7 @@ import RequireAuth from "./components/RequireAuth";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login";
 import Unauthorized from "./components/Unauthorized";
-import SubjectList from "./components/SubjectList";
+import Subject from "./components/Subject";
 
 const ROLES = {
   Student: 2000,
@@ -29,8 +29,8 @@ function App() {
         {/* private/teacher routes */}
         {/* <Route element={<RequireAuth allowedRoles={[ROLES.Teacher]} />}> */}
         <Route path="/user" element={<UserListComponent />} />
-        <Route path="/add-user" element={<AddUserComponent />} />
-        <Route path="/subject" element={<SubjectList />} />
+        <Route path="/add-user" element={<AddUser />} />
+        <Route path="/subject" element={<Subject />} />
         {/* </Route> */}
 
         {/* catch all path */}

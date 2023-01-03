@@ -1,18 +1,29 @@
-const EditSubject = ({
-  subjects,
-  editnameSubject,
-  setEditnameSubject,
-  editSubject,
-  setIsOpen,
-}) => {
+import React from "react";
+import api from "../../api/baseURL";
+
+const AddSubject = (props) => {
+  const { subjects, setSubjects, newSubject, setNewSubject, setIsOpen } = props;
+
+  const addSubject = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await api.post("/subject", newSubject);
+      console.log(response);
+      const allSubjects = [...subjects, response.data];
+      setSubjects(allSubjects);
+    } catch (err) {
+      console.log(`error: ${err.message}`);
+    }
+  };
+
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card">
-            <h3 className="card-header text-center">Edit subject</h3>
+            <h3 className="card-header text-center">New subject</h3>
             <div className="card-body">
-              <form onSubmit={editSubject}>
+              <form onSubmit={addSubject}>
                 <div className="form-group">
                   <label htmlFor="nameSubject" className="form-label">
                     Subject Name
@@ -22,10 +33,10 @@ const EditSubject = ({
                     placeholder="Name subject"
                     name="nameSubject"
                     className="form-control"
-                    value={editnameSubject.nameSubject}
+                    value={newSubject.nameSubject}
                     onChange={(e) =>
-                      setEditnameSubject({
-                        ...editnameSubject,
+                      setNewSubject({
+                        ...newSubject,
                         nameSubject: e.target.value,
                       })
                     }
@@ -53,4 +64,4 @@ const EditSubject = ({
   );
 };
 
-export default EditSubject;
+export default AddSubject;

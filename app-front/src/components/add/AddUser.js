@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const AddUserComponent = () => {
+const AddUser = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
 
   // const saveUser = (e) => {
   //   e.preventDefault();
@@ -78,7 +76,9 @@ const AddUserComponent = () => {
                     Save
                   </button>
                   <Link to="/user">
-                    <button className="btn btn-danger btn-block mt-1">Cancel</button>
+                    <button className="btn btn-danger btn-block mt-1">
+                      Cancel
+                    </button>
                   </Link>
                 </form>
               </div>
@@ -90,4 +90,4 @@ const AddUserComponent = () => {
   );
 };
 
-export default AddUserComponent;
+export default AddUser;
