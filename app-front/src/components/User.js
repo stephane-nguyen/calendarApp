@@ -5,7 +5,6 @@ import UserList from "./list/UserList";
 
 function User() {
   const [users, setUsers] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -35,30 +34,9 @@ function User() {
     }
   };
 
-  //   const editUser = async (id) => {
-  //     const updatedUser = { id, nameSubject: editnameSubject };
-  //     try {
-  //       const response = await api.put(`/user/${id}`, updatedUser);
-  //       setUsers(
-  //         users.map((user) =>
-  //           //if not, we keep the subject as it is because we didnt update it
-  //           user.idUser === id ? { ...response.data } : user
-  //         )
-  //       );
-  //       setEditnameSubject("");
-  //     } catch (err) {
-  //       console.log(`error: ${err.message}`);
-  //     }
-  //   };
-
   return (
     <>
-      <UserList
-        users={users}
-        setIsOpen={setIsOpen}
-        // editUser={editUser}
-        deleteUser={deleteUser}
-      />
+      <UserList users={users} deleteUser={deleteUser} />
     </>
   );
 }

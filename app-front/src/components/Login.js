@@ -7,7 +7,7 @@ import api from "../api/baseURL";
 const LOGIN_URL = "/login";
 
 export default function Login() {
-  const { setAuth } = useAuth();
+  const setAuth = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();

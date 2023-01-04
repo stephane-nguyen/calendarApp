@@ -23,8 +23,8 @@ const AddUser = () => {
       setLastname("");
       setEmail("");
       setPassword("");
-    } catch (err) {
-      console.log(`error: ${err.message}`);
+    } catch (error) {
+      console.error(error.response.data);
     }
     //navigate("/user");
   };
