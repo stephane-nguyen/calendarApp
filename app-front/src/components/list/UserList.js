@@ -1,29 +1,15 @@
-import React, { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
 
-const UserListComponent = () => {
-  const [users, setUsers] = useState([]);
-
-  // useEffect(() => {
-  //   UserService.getAllUsers()
-  //     .then((response) => {
-  //       setUsers(response.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
+const UserList = ({ users, setUsers, deleteUser }) => {
   return (
     <div className="container">
       <h2 className="text-center">List of Users</h2>
       <Link to="/add-user" className="btn btn-primary mb-2">
-        {" "}
         Add User
       </Link>
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Id</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
@@ -33,7 +19,6 @@ const UserListComponent = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user.idUser}>
-              <td>{user.idUser}</td>
               <td>{user.firstname}</td>
               <td>{user.lastname}</td>
               <td>{user.email}</td>
@@ -52,4 +37,4 @@ const UserListComponent = () => {
   );
 };
 
-export default UserListComponent;
+export default UserList;
