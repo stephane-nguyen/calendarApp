@@ -32,7 +32,7 @@ public class SubjectController {
 	}
 	
 	@GetMapping(value = "/subject/{id}")
-	public @ResponseBody ResponseEntity<Subject> getSubject(Integer id){
+	public @ResponseBody ResponseEntity<Subject> getSubject(@PathVariable Integer id){
 //		return ResponseEntity.ok().body(subjectService.getSubjectById(203));
 
 		return ResponseEntity.ok().body(subjectService.getSubjectById(id));
@@ -40,7 +40,7 @@ public class SubjectController {
 	}
 	
 	@PutMapping("subject/{id}")
-	public ResponseEntity<Subject> updateSubject(Integer id, Subject subject){
+	public ResponseEntity<Subject> updateSubject(@PathVariable Integer id, Subject subject){
 //		Subject st = new Subject("Stephanelenul");
 //		st.setIdSubject(203);
 //		return ResponseEntity.ok().body(this.subjectService.updateSubject(st));

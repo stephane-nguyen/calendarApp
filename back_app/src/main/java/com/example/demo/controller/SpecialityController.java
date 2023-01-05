@@ -42,7 +42,7 @@ public class SpecialityController {
 	}
 	
 	@PutMapping("/speciality/{id}")
-	public ResponseEntity<Speciality> updateSpeciality(Integer id, Speciality spe){
+	public ResponseEntity<Speciality> updateSpeciality(@PathVariable Integer id, Speciality spe){
 		//Declaration to test functionality
 		//Speciality newspe = new Speciality("Génie physique ");
 		//newspe.setIdSpeciality(202);
@@ -59,7 +59,7 @@ public class SpecialityController {
 		return HttpStatus.OK;
 	}
 	@GetMapping("/speciality/{id}")
-	public @ResponseBody ResponseEntity<Speciality> getSpeciality(Integer id){
+	public @ResponseBody ResponseEntity<Speciality> getSpeciality(@PathVariable Integer id){
 		//to test
 		//return ResponseEntity.ok().body(this.specialityService.getSpeciality(152));
 		return ResponseEntity.ok().body(this.specialityService.getSpeciality(id));
