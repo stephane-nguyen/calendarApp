@@ -1,8 +1,8 @@
-import CalendarComponent from "../components/CalendarComponent";
+import Agenda from "./Agenda";
 const Home = () => {
   return (
     <>
-      <CalendarComponent />
+      <Agenda />
     </>
   );
 };

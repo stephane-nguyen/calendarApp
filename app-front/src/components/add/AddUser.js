@@ -1,26 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import api from "../../api/baseURL";
 
-const AddUserComponent = () => {
+const AddUser = () => {
+  const [users, setUsers] = useState([]);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
-  // const saveUser = (e) => {
-  //   e.preventDefault();
-  //   const user = { firstname, lastname, email };
-
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       navigate("/user");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const saveUser = async (e) => {
+    e.preventDefault();
+    const user = { firstname, lastname, email, password };
+    try {
+      const response = await api.post("/user", user);
+      const allUsers = [...users, response.data];
+      setUsers(allUsers);
+      setFirstname("");
+      setLastname("");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      console.error(error.response.data);
+    }
+    //navigate("/user");
+  };
 
   return (
     <div>
@@ -71,14 +78,29 @@ const AddUserComponent = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter email"
+                      name="password"
+                      className="form-control"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
                   <button
                     className="btn btn-success btn-block"
-                    // onClick={(e) => saveUser(e)}
+                    onClick={(e) => saveUser(e)}
                   >
                     Save
                   </button>
                   <Link to="/user">
-                    <button className="btn btn-danger btn-block">Cancel</button>
+                    <button className="btn btn-danger btn-block mt-1">
+                      Cancel
+                    </button>
                   </Link>
                 </form>
               </div>
@@ -90,4 +112,4 @@ const AddUserComponent = () => {
   );
 };
 
-export default AddUserComponent;
+export default AddUser;
