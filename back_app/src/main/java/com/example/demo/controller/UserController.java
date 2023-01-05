@@ -31,15 +31,15 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/user/{id}")
-	public @ResponseBody ResponseEntity<User> getUser(Integer id){
-//		return ResponseEntity.ok().body(userService.getUserById(1));
-
+	public @ResponseBody ResponseEntity<User> getUser(@PathVariable Integer id){
+		
+		System.out.println(id);
 		return ResponseEntity.ok().body(userService.getUserById(id));
 		
 	}
 	
 	@PutMapping("user/{id}")
-	public ResponseEntity<User> updateUser(Integer id, User user){
+	public ResponseEntity<User> updateUser(@PathVariable Integer id, User user){
 //		User st = new User("tefdsqfsqst", "tesssfdsqf", "tota@gmail.com", "fdqfdsqfsdq");
 //		st.setIdUser(1);
 //		return ResponseEntity.ok().body(this.userService.updateUser(st));
