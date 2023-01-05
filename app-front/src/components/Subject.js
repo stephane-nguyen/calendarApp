@@ -8,7 +8,6 @@ import Modal from "./Modal";
 
 const Subject = () => {
   const [subjects, setSubjects] = useState([]);
-  const [newSubject, setNewSubject] = useState([]);
   const [editnameSubject, setEditnameSubject] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
@@ -65,8 +64,6 @@ const Subject = () => {
         <AddSubject
           subjects={subjects}
           setSubjects={setSubjects}
-          newSubject={newSubject}
-          setNewSubject={setNewSubject}
           setIsOpen={setIsOpen}
         />
       </Modal>

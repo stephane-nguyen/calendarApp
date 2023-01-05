@@ -1,115 +1,99 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import api from "../../api/baseURL";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const AddUser = () => {
-  const [users, setUsers] = useState([]);
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function AddUser() {
+  let navigate = useNavigate();
 
-  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
 
-  const saveUser = async (e) => {
+  const { firstname, lastname, email, password } = user;
+
+  const onInputChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const user = { firstname, lastname, email, password };
-    try {
-      const response = await api.post("/user", user);
-      const allUsers = [...users, response.data];
-      setUsers(allUsers);
-      setFirstname("");
-      setLastname("");
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      console.error(error.response.data);
-    }
-    //navigate("/user");
+    await api.post("/user", user);
+    navigate("/user");
   };
 
   return (
-    <div>
-      <br /> <br />
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="card">
-              <h3 className="card-header text-center">Add user</h3>
-              <div className="card-body">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="firstname" className="form-label">
-                      Firstname
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter firstname"
-                      name="firstname"
-                      className="form-control"
-                      value={firstname}
-                      onChange={(e) => setFirstname(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="lastname" className="form-label">
-                      Lastname
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter lastname"
-                      name="lastname"
-                      className="form-control"
-                      value={lastname}
-                      onChange={(e) => setLastname(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email" className="form-label">
-                      Email
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter email"
-                      name="email"
-                      className="form-control"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password" className="form-label">
-                      Password
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter email"
-                      name="password"
-                      className="form-control"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  <button
-                    className="btn btn-success btn-block"
-                    onClick={(e) => saveUser(e)}
-                  >
-                    Save
-                  </button>
-                  <Link to="/user">
-                    <button className="btn btn-danger btn-block mt-1">
-                      Cancel
-                    </button>
-                  </Link>
-                </form>
-              </div>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6 border rounded p-4 mt-5 shadow">
+          <h2 className="text-center m-4">Add User</h2>
+
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className="form-group">
+              <label htmlFor="firstname" className="form-label">
+                First Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your first name"
+                name="firstname"
+                value={firstname}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
-          </div>
+            <div className="form-group">
+              <label htmlFor="lastname" className="form-label">
+                Last Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your last name"
+                name="lastname"
+                value={lastname}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                E-mail
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your e-mail address"
+                name="email"
+                value={email}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter your password"
+                name="password"
+                value={password}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="form-group d-flex justify-content-between">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+              <Link className="btn btn-danger" to="/user">
+                Cancel
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
-};
-
-export default AddUser;
+}

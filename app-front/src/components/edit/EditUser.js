@@ -1,106 +1,111 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../api/baseURL";
-import { Link } from "react-router-dom";
 
-function EditUser() {
-  const [users, setUsers] = useState([]);
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function EditUser() {
+  let navigate = useNavigate();
 
-  const editUser = async (id) => {
-    const updatedUser = { id, firstname, lastname, email, password };
-    try {
-      const response = await api.put(`/user/${id}`, updatedUser);
-      setUsers(
-        users.map((user) =>
-          //if not, we keep the subject as it is because we didnt update it
-          user.idUser === id ? { ...response.data } : user
-        )
-      );
-      setFirstname("");
-      setLastname("");
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      console.error(error.response.data);
-    }
+  const { id } = useParams();
+
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+
+  const { firstname, lastname, email, password } = user;
+
+  const onInputChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await api.put(`user/${id}`, user);
+    navigate("/user");
+  };
+
+  const loadUser = async () => {
+    const result = await api.get(`/user/${id}`);
+    setUser(result.data);
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <h3 className="card-header text-center">Edit Student</h3>
-            <div className="card-body">
-              <form onSubmit={editUser}>
-                <div className="form-group">
-                  <label htmlFor="firstname" className="form-label">
-                    Student firstname
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="firstname"
-                    name="firstname"
-                    className="form-control"
-                    value={users.firstname}
-                    onChange={(e) =>
-                      setUsers({
-                        ...users,
-                        firstname: e.target.value,
-                      })
-                    }
-                  />
-                  <label htmlFor="lastname" className="form-label mt-2">
-                    Student lastname
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="lastname"
-                    name="lastname"
-                    className="form-control"
-                    value={users.lastname}
-                    onChange={(e) =>
-                      setUsers({
-                        ...users,
-                        lastname: e.target.value,
-                      })
-                    }
-                  />
-                  <label htmlFor="email" className="form-label mt-2">
-                    Student email
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="email"
-                    name="email"
-                    className="form-control"
-                    value={users.email}
-                    onChange={(e) =>
-                      setUsers({
-                        ...users,
-                        email: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary btn-block">
-                  Edit
-                </button>
-                <Link to="/user">
-                  <button className="btn btn-danger btn-block mt-1">
-                    Cancel
-                  </button>
-                </Link>
-              </form>
+        <div className="col-md-6 border rounded p-4 mt-5 shadow">
+          <h2 className="text-center m-4">Edit User</h2>
+
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className="form-group">
+              <label htmlFor="Firstname" className="form-label">
+                Firstname
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your firstname"
+                name="firstname"
+                value={firstname}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
-          </div>
+            <div className="form-group">
+              <label htmlFor="Lastname" className="form-label">
+                Lastname
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your lastname"
+                name="lastname"
+                value={lastname}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="Email" className="form-label">
+                E-mail
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your e-mail address"
+                name="email"
+                value={email}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="Password" className="form-label">
+                Password
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your e-mail address"
+                name="password"
+                value={password}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="form-group d-flex justify-content-between">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+              <Link className="btn btn-danger" to="/user">
+                Cancel
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
 }
-
-export default EditUser;

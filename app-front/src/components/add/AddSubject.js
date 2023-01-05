@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import api from "../../api/baseURL";
 
-const AddSubject = (props) => {
-  const { subjects, setSubjects, newSubject, setNewSubject, setIsOpen } = props;
+const AddSubject = ({ subjects, setSubjects, setIsOpen }) => {
+  const [nameSubject, setNameSubject] = useState("");
 
   const addSubject = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/subject", newSubject);
+      const response = await api.post("/subject", { nameSubject });
       console.log(response);
       const allSubjects = [...subjects, response.data];
       setSubjects(allSubjects);
+      setNameSubject("");
     } catch (err) {
       console.log(`error: ${err.message}`);
     }
@@ -23,7 +24,7 @@ const AddSubject = (props) => {
           <div className="card">
             <h3 className="card-header text-center">New subject</h3>
             <div className="card-body">
-              <form onSubmit={addSubject}>
+              <form onSubmit={(e) => addSubject(e)}>
                 <div className="form-group">
                   <label htmlFor="nameSubject" className="form-label">
                     Subject Name
@@ -33,19 +34,14 @@ const AddSubject = (props) => {
                     placeholder="Name subject"
                     name="nameSubject"
                     className="form-control"
-                    value={newSubject.nameSubject}
-                    onChange={(e) =>
-                      setNewSubject({
-                        ...newSubject,
-                        nameSubject: e.target.value,
-                      })
-                    }
+                    value={nameSubject}
+                    onChange={(e) => setNameSubject(e.target.value)}
                   />
                 </div>
                 <button
                   type="submit"
                   className="btn btn-primary btn-block"
-                  // onClick={setIsOpen(false)}
+                  onClick={setIsOpen(false)}
                 >
                   Add
                 </button>

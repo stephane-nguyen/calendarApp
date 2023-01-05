@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
@@ -17,16 +18,16 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User createUser(User user) {
-		
+	public User createUser(@RequestBody User user) {
+
 		return this.userRepository.save(user);
 	}
 
-	public User updateUser(User user) {
+	public User updateUser(@RequestBody User user) {
 		Optional<User> userDb = this.userRepository.findById(user.getIdUser());
-		
+
 		User userUpdate = userDb.get();
-				
+
 		userUpdate.setIdUser(user.getIdUser());
 		userUpdate.setFirstname(user.getFirstname());
 		userUpdate.setLastname(user.getLastname());
@@ -41,12 +42,11 @@ public class UserService {
 	}
 
 	public User getUserById(Integer userId) {
-		
+
 		return this.userRepository.findById(userId).get();
-		
+
 	}
 
-	
 	public void deleteUser(Integer id) {
 		this.userRepository.deleteById(id);
 
