@@ -45,10 +45,11 @@ public class StudentController {
 
 	
 	@PostMapping("/student")
-	public ResponseEntity<Student> createSubject (@RequestBody Student s) {
+	public ResponseEntity<Student> createSubject () {
+		//@RequestBody Student s
+		Student stu = new Student(250);
 
-
-		return ResponseEntity.ok().body(this.studentService.createStudent(s));
+		return ResponseEntity.ok().body(this.studentService.createStudent(stu));
 	}
 	
 	@DeleteMapping("/student/{id}")
