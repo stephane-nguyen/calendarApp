@@ -8,11 +8,10 @@ import Modal from "./Modal";
 
 const Subject = () => {
   const [subjects, setSubjects] = useState([]);
-  const [editnameSubject, setEditnameSubject] = useState("");
+  const [id, setId] = useState(null);
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  /* CRUD */
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   useEffect(() => {
     const getAllSubjects = async () => {
@@ -42,46 +41,34 @@ const Subject = () => {
     }
   };
 
-  const editSubject = async (id) => {
-    const updatedSubject = { id, nameSubject: editnameSubject };
-    try {
-      const response = await api.put(`/subject/${id}`, updatedSubject);
-      setSubjects(
-        subjects.map((subject) =>
-          //if not, we keep the subject as it is because we didnt update it
-          subject.idSubject === id ? { ...response.data } : subject
-        )
-      );
-      setEditnameSubject("");
-    } catch (err) {
-      console.log(`error: ${err.message}`);
-    }
-  };
-
   return (
     <>
-      <Modal open={isOpen}>
+      <Modal open={isAddOpen}>
         <AddSubject
           subjects={subjects}
           setSubjects={setSubjects}
-          setIsOpen={setIsOpen}
+          closeModal={() => {
+            setIsAddOpen(false);
+          }}
         />
       </Modal>
 
-      <Modal open={isOpen}>
+      <Modal open={isEditOpen}>
         <EditSubject
           subjects={subjects}
-          editnameSubject={editnameSubject}
-          setEditnameSubject={setEditnameSubject}
-          editSubject={editSubject}
-          setIsOpen={setIsOpen}
+          setSubjects={setSubjects}
+          id={id}
+          closeModal={() => {
+            setIsEditOpen(false);
+          }}
         />
       </Modal>
 
       <SubjectList
         subjects={subjects}
-        setIsOpen={setIsOpen}
-        editSubject={editSubject}
+        setId={setId}
+        setIsAddOpen={setIsAddOpen}
+        setIsEditOpen={setIsEditOpen}
         deleteSubject={deleteSubject}
       />
     </>

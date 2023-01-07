@@ -1,10 +1,26 @@
-const EditSubject = ({
-  subjects,
-  editnameSubject,
-  setEditnameSubject,
-  editSubject,
-  setIsOpen,
-}) => {
+import React, { useState } from "react";
+import api from "../../api/baseURL";
+
+const EditSubject = ({ subjects, setSubjects, id, closeModal }) => {
+  const [nameSubject, setNameSubject] = useState("");
+
+  const editSubject = async (e, closeModal) => {
+    e.preventDefault();
+    try {
+      const response = await api.put(`/subject/${id}`, { nameSubject });
+      setSubjects(
+        subjects.map((subject) =>
+          //if not, we keep the subject as it is because we didnt update it
+          subject.idSubject === id ? { ...response.data } : subject
+        )
+      );
+      setNameSubject("");
+      closeModal();
+    } catch (err) {
+      console.log(`error: ${err.message}`);
+    }
+  };
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -12,35 +28,26 @@ const EditSubject = ({
           <div className="card">
             <h3 className="card-header text-center">Edit subject</h3>
             <div className="card-body">
-              <form onSubmit={editSubject}>
+              <form onSubmit={(e) => editSubject(e, closeModal)}>
                 <div className="form-group">
                   <label htmlFor="nameSubject" className="form-label">
                     Subject Name
                   </label>
                   <input
                     type="text"
-                    placeholder="Name subject"
+                    placeholder="Modify your subject name"
                     name="nameSubject"
                     className="form-control"
-                    value={editnameSubject.nameSubject}
-                    onChange={(e) =>
-                      setEditnameSubject({
-                        ...editnameSubject,
-                        nameSubject: e.target.value,
-                      })
-                    }
+                    value={nameSubject}
+                    onChange={(e) => setNameSubject(e.target.value)}
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-block"
-                  // onClick={setIsOpen(false)}
-                >
-                  Add
+                <button type="submit" className="btn btn-primary btn-block">
+                  Edit
                 </button>
                 <button
                   className="btn btn-danger btn-block"
-                  onClick={() => setIsOpen(false)}
+                  onClick={closeModal}
                 >
                   Cancel
                 </button>

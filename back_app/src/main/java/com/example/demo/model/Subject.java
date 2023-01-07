@@ -12,18 +12,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "subject")
 public class Subject implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "idSubject")
-    private Integer idSubject;
-    
-    @Column(name = "nameSubject")
-    private String nameSubject;
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name = "idSubject")
+	private Integer idSubject;
+
+	@Column(name = "nameSubject")
+	private String nameSubject;
+
 	public Subject() {
 		super();
 	}
-    
+
 	public Subject(String nameSubject) {
 
 		this.nameSubject = nameSubject;
@@ -49,6 +49,5 @@ public class Subject implements Serializable {
 	public String toString() {
 		return "Subject [idSubject=" + idSubject + ", nameSubject=" + nameSubject + "]";
 	}
-	
-	
+
 }
