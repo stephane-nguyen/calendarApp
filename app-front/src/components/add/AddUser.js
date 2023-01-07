@@ -20,8 +20,12 @@ export default function AddUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await api.post("/user", user);
-    navigate("/user");
+    try {
+      await api.post("/user", user);
+      navigate("/user");
+    } catch (error) {
+      console.log(`error: ${error.message}`);
+    }
   };
 
   return (
