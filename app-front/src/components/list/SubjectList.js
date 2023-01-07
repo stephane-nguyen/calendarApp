@@ -42,7 +42,7 @@ const SubjectList = ({
                       data-placement="top"
                       title="Edit"
                     >
-                      <i className="fa fa-edit"></i>
+                      Edit
                     </button>
                   </li>
                   <li className="list-inline-item">
@@ -54,7 +54,7 @@ const SubjectList = ({
                       data-placement="top"
                       title="Delete"
                     >
-                      <i className="fa fa-trash"></i>
+                      Delete
                     </button>
                   </li>
                 </ul>
