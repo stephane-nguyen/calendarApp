@@ -45,13 +45,10 @@ public class StudentController {
 
 	
 	@PostMapping("/student")
-	public ResponseEntity<Student> createSubject () {
-		//@RequestBody Student s
-		Student stu = new Student(250);
-
-		return ResponseEntity.ok().body(this.studentService.createStudent(stu));
+	public ResponseEntity<Student> createSubject (@RequestBody Student s) {
+		return ResponseEntity.ok().body(this.studentService.createStudent(s));
 	}
-	
+		
 	@DeleteMapping("/student/{id}")
 	public HttpStatus deleteStudent(@PathVariable Integer id){
 
