@@ -1,10 +1,19 @@
 import React from "react";
 
-const SubjectList = ({ subjects, setIsOpen, editSubject, deleteSubject }) => {
+const SubjectList = ({
+  subjects,
+  setId,
+  setIsAddOpen,
+  setIsEditOpen,
+  deleteSubject,
+}) => {
   return (
     <div className="container">
       <h2 className="text-center">List of Subjects</h2>
-      <button className="btn btn-primary mb-2" onClick={() => setIsOpen(true)}>
+      <button
+        className="btn btn-primary mb-2"
+        onClick={() => setIsAddOpen(true)}
+      >
         Add Subject
       </button>
       <table className="table table-bordered table-striped">
@@ -23,7 +32,10 @@ const SubjectList = ({ subjects, setIsOpen, editSubject, deleteSubject }) => {
                 <ul className="list-inline m-0">
                   <li className="list-inline-item">
                     <button
-                      onClick={() => editSubject(subject.idSubject)}
+                      onClick={() => {
+                        setId(subject.idSubject);
+                        setIsEditOpen(true);
+                      }}
                       className="btn btn-success btn-sm rounded-0"
                       type="button"
                       data-toggle="tooltip"

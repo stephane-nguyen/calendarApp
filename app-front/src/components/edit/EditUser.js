@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../api/baseURL";
@@ -12,10 +11,9 @@ export default function EditUser() {
     firstname: "",
     lastname: "",
     email: "",
-    password: "",
   });
 
-  const { firstname, lastname, email, password } = user;
+  const { firstname, lastname, email } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -79,19 +77,6 @@ export default function EditUser() {
                 placeholder="Enter your e-mail address"
                 name="email"
                 value={email}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Password" className="form-label">
-                Password
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your e-mail address"
-                name="password"
-                value={password}
                 onChange={(e) => onInputChange(e)}
               />
             </div>

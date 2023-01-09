@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import api from "../../api/baseURL";
 
-const AddSubject = ({ subjects, setSubjects, setIsOpen }) => {
+const AddSubject = ({ subjects, setSubjects, closeModal }) => {
   const [nameSubject, setNameSubject] = useState("");
 
-  const addSubject = async (e) => {
+  const addSubject = async (e, closeModal) => {
     e.preventDefault();
     try {
       const response = await api.post("/subject", { nameSubject });
@@ -12,6 +12,7 @@ const AddSubject = ({ subjects, setSubjects, setIsOpen }) => {
       const allSubjects = [...subjects, response.data];
       setSubjects(allSubjects);
       setNameSubject("");
+      closeModal();
     } catch (err) {
       console.log(`error: ${err.message}`);
     }
@@ -24,30 +25,26 @@ const AddSubject = ({ subjects, setSubjects, setIsOpen }) => {
           <div className="card">
             <h3 className="card-header text-center">New subject</h3>
             <div className="card-body">
-              <form onSubmit={(e) => addSubject(e)}>
+              <form onSubmit={(e) => addSubject(e, closeModal)}>
                 <div className="form-group">
                   <label htmlFor="nameSubject" className="form-label">
                     Subject Name
                   </label>
                   <input
                     type="text"
-                    placeholder="Name subject"
+                    placeholder="Enter your subject"
                     name="nameSubject"
                     className="form-control"
                     value={nameSubject}
                     onChange={(e) => setNameSubject(e.target.value)}
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-block"
-                  onClick={setIsOpen(false)}
-                >
+                <button type="submit" className="btn btn-primary btn-block">
                   Add
                 </button>
                 <button
                   className="btn btn-danger btn-block"
-                  onClick={() => setIsOpen(false)}
+                  onClick={closeModal}
                 >
                   Cancel
                 </button>
