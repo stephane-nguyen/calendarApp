@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 @Table(name = "user")
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "idUser")
 	private Integer idUser;
 	private String firstname;

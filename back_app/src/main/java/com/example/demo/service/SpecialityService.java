@@ -17,22 +17,27 @@ public class SpecialityService {
 	private SpecialityRepository specialityRepository;
 	
 	public Speciality createSpeciality(Speciality speciality){
-		return this.specialityRepository.save(speciality);}
-	
-	public List<Speciality> getAllSpeciality(){
-		return this.specialityRepository.findAll();
-		
+		return this.specialityRepository.save(speciality);
 	}
+	
 	public Speciality updateSpeciality(Speciality speciality) {
 		Speciality specialityUpdated = this.specialityRepository.findById(speciality.getIdSpeciality()).get();
 		specialityUpdated.setIdSpeciality(speciality.getIdSpeciality());
 		specialityUpdated.setNameSpeciality(speciality.getNameSpeciality());
-		return specialityUpdated;}
+		
+		return specialityUpdated;
+	}
 	
 	public void deleteSpeciality(Integer id) {
 		this.specialityRepository.deleteById(id);
 	}
+	
 	public Speciality getSpeciality(Integer id) {
 		return this.specialityRepository.findById(id).get();
 	}
+	
+	public List<Speciality> getAllSpeciality(){
+		return this.specialityRepository.findAll();
+	}
+	
 }
