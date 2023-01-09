@@ -16,6 +16,7 @@ public class Student implements Serializable {
 	@Id
     @Column(name = "user_id_user")
 	private Integer user_id_user;
+	
 	@Column(name = "id_student")
 	private String id_student;
 	

@@ -31,28 +31,22 @@ public class StudentController {
 	@Autowired 
 	private UserService userService;
 	
-
-	@GetMapping(value = "/student")
-	public ResponseEntity<List<User>> getAllStudent(){
-		
-		List<User> studentList = new ArrayList<User>();
-		
-		this.studentService.getAllStudent().forEach(student -> studentList.add(this.userService.getUserById(student.getuser_id_user())));
-				
-		
-		return ResponseEntity.ok().body(studentList);
-	}
-
-	
 	@PostMapping("/student")
-	public ResponseEntity<Student> createSubject (@RequestBody Student s) {
-		return ResponseEntity.ok().body(this.studentService.createStudent(s));
+	public ResponseEntity<Student> createStudent (@RequestBody Student student) {
+		return ResponseEntity.ok().body(this.studentService.createStudent(student));
 	}
 		
 	@DeleteMapping("/student/{id}")
 	public HttpStatus deleteStudent(@PathVariable Integer id){
-
 		this.studentService.deleteStudent(id);
 		return HttpStatus.OK;
 	}
+
+	@GetMapping(value = "/student")
+	public ResponseEntity<List<User>> getAllStudent(){
+		List<User> studentList = new ArrayList<User>();
+		this.studentService.getAllStudent().forEach(student -> studentList.add(this.userService.getUserById(student.getuser_id_user())));
+		return ResponseEntity.ok().body(studentList);
+	}
+
 }
