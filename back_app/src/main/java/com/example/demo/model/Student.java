@@ -16,6 +16,7 @@ public class Student implements Serializable {
 	@Id
     @Column(name = "user_id_user")
 	private Integer user_id_user;
+	
 	@Column(name = "id_student")
 	private String id_student;
 	
@@ -23,7 +24,6 @@ public class Student implements Serializable {
 		super();
 	}
 	
-
 	public Student(Integer user_id_user) {
 		super();
 		this.user_id_user = user_id_user;

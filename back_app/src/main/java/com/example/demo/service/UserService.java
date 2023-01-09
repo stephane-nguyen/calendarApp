@@ -19,21 +19,19 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public User createUser(@RequestBody User user) {
-
 		return this.userRepository.save(user);
 	}
 
 	public User updateUser(@RequestBody User user) {
 		Optional<User> userDb = this.userRepository.findById(user.getIdUser());
-
 		User userUpdate = userDb.get();
-
 		userUpdate.setIdUser(user.getIdUser());
 		userUpdate.setFirstname(user.getFirstname());
 		userUpdate.setLastname(user.getLastname());
 		userUpdate.setEmail(user.getEmail());
 		userUpdate.setPassword(user.getPassword());
 		userRepository.save(userUpdate);
+		
 		return userUpdate;
 	}
 
@@ -42,14 +40,11 @@ public class UserService {
 	}
 
 	public User getUserById(Integer userId) {
-
 		return this.userRepository.findById(userId).get();
-
 	}
 
 	public void deleteUser(Integer id) {
 		this.userRepository.deleteById(id);
-
 	}
 
 }

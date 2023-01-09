@@ -22,13 +22,12 @@ public class StudentService {
 		return this.studentRepository.save(student);
 	}
 	
-	public List<Student> getAllStudent(){
-		return this.studentRepository.findAll();
-		
-	}
-	
 	public void deleteStudent(Integer id) {
 		this.studentRepository.deleteById(id);
 	}
-
+	
+	public List<Student> getAllStudent(){
+		return this.studentRepository.findAll();
+	}
+	
 }

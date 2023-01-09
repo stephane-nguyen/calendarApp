@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "subject")
 public class Subject implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "idSubject")
@@ -19,6 +20,7 @@ public class Subject implements Serializable {
 
 	@Column(name = "nameSubject")
 	private String nameSubject;
+
 
 	public Subject() {
 		super();
