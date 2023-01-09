@@ -24,7 +24,6 @@ public class Student implements Serializable {
 		super();
 	}
 	
-
 	public Student(Integer user_id_user) {
 		super();
 		this.user_id_user = user_id_user;
