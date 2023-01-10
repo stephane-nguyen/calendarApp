@@ -3,9 +3,9 @@ import DatePicker from "react-datepicker";
 import api from "../../api/baseURL";
 
 const AddAgenda = ({ closeModal }) => {
-  const [exam, setExam] = useState({ title: "", start: "", end: "" });
+  const [exam, setExam] = useState({ title: "", start: "", end: "", room: "" });
 
-  const { title, start, end } = exam;
+  const { title, start, end, room } = exam;
 
   const onInputChange = (e) => {
     setExam({ ...exam, [e.target.name]: e.target.value });
@@ -62,6 +62,19 @@ const AddAgenda = ({ closeModal }) => {
                       selected={end}
                       onChange={(e) => onInputChange(e)}
                     />
+                  </div>
+
+                  <div className="form-group">
+                    <select onChange={(e) => onInputChange(e)}>
+                      {rooms
+                        ? //check first if it is available then do another ternary operation for the following code
+                          rooms.map((room) => {
+                            <option key={room.id} value={room.id}>
+                              {room.id}
+                            </option>;
+                          })
+                        : null}
+                    </select>
                   </div>
 
                   <button type="submit" className="btn btn-primary btn-block">

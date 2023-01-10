@@ -72,7 +72,7 @@ function Agenda() {
 
   const deleteExam = async (id) => {
     try {
-      await api.delete(`user/${id}`);
+      await api.delete(`exam/${id}`);
       setExams(exams.filter((exam) => exam.id !== id));
     } catch (err) {
       console.log(`error: ${err.message}`);
