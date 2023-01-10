@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-const UserList = ({ users, deleteUser }) => {
+const StudentList = ({ students, deleteStudent }) => {
   return (
     <div className="container">
-      <h2 className="text-center">List of Users</h2>
-      <Link to="/add-user" className="btn btn-primary mb-2">
-        Add User
+      <h2 className="text-center">List of Students</h2>
+      <Link to="/add-student" className="btn btn-primary mb-2">
+        Add student
       </Link>
       <table className="table table-bordered table-striped">
         <thead>
@@ -17,13 +17,13 @@ const UserList = ({ users, deleteUser }) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.idUser}>
-              <td>{user.firstname}</td>
-              <td>{user.lastname}</td>
-              <td>{user.email}</td>
+          {students.map((student) => (
+            <tr key={student.idStudent}>
+              <td>{student.firstname}</td>
+              <td>{student.lastname}</td>
+              <td>{student.email}</td>
               <td>
-                <Link to={`/user/${user.idUser}`}>
+                <Link to={`/student/${student.idStudent}`}>
                   <button
                     className="btn btn-success btn-sm rounded-0 mr-1"
                     type="button"
@@ -35,7 +35,7 @@ const UserList = ({ users, deleteUser }) => {
                   </button>
                 </Link>
                 <button
-                  onClick={() => deleteUser(user.idUser)}
+                  onClick={() => deleteStudent(student.idStudent)}
                   className="btn btn-danger btn-sm rounded-0"
                   type="button"
                   data-toggle="tooltip"
@@ -53,4 +53,4 @@ const UserList = ({ users, deleteUser }) => {
   );
 };
 
-export default UserList;
+export default StudentList;

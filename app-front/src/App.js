@@ -10,10 +10,10 @@ import Unauthorized from "./components/Unauthorized";
 import Login from "./components/Login";
 
 import Subject from "./components/Subject";
+import Student from "./components/Student";
 
-import User from "./components/User";
-import AddUser from "./components/add/AddUser";
-import EditUser from "./components/edit/EditUser";
+import AddStudent from "./components/add/AddStudent";
+import EditStudent from "./components/edit/EditStudent";
 
 const ROLES = {
   Student: 2000,
@@ -31,9 +31,10 @@ function App() {
 
         {/* private/teacher routes */}
         {/* <Route element={<RequireAuth allowedRoles={[ROLES.Teacher]} />}> */}
-        <Route path="/user" element={<User />} />
-        <Route path="/add-user" element={<AddUser />} />
-        <Route path="/user/:id" element={<EditUser />} />
+
+        <Route path="/student" element={<Student />} />
+        <Route path="/add-student" element={<AddStudent />} />
+        <Route path="/student/:id" element={<EditStudent />} />
         <Route path="/subject" element={<Subject />} />
         {/* </Route> */}
 
