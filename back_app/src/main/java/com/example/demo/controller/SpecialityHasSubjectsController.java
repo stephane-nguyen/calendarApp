@@ -35,7 +35,6 @@ public class SpecialityHasSubjectsController {
 	private SpecialityService specialityService;
 
 	
-	
 	@PostMapping("/addsubjecttospeciality")
 	public ResponseEntity<SpecialityHasSubjects> createSpecialityHasSubjectsService(@RequestBody SpecialityHasSubjects specialityHasSubjectsService){
 		return ResponseEntity.ok().body(this.specialityHasSubjectsService.createSpecialityHasSubjectsRepository(specialityHasSubjectsService));

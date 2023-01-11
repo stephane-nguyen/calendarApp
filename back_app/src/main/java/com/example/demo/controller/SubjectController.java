@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Subject;
-import com.example.demo.service.SpecialityService;
 import com.example.demo.service.SubjectService;
 
 @RestController
