@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.SpecialityHasSubjects;
-import com.example.demo.model.SpecialityHasSubjectsId;
+import com.example.demo.model.doublekey.SpecialityHasSubjectsId;
 
 @Repository
 public interface SpecialityHasSubjectsRepository extends JpaRepository<SpecialityHasSubjects, SpecialityHasSubjectsId> {

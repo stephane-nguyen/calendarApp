@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 
+import com.example.demo.model.doublekey.SpecialityHasSubjectsId;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
