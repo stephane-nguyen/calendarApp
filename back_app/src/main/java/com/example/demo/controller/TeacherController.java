@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Teacher;
@@ -41,10 +42,17 @@ public class TeacherController {
 		return HttpStatus.OK;
 	}
 	
+	@GetMapping(value = "/teacher/{id}")
+	public @ResponseBody ResponseEntity<User> getTeacherById(@PathVariable Integer id){
+
+		return ResponseEntity.ok().body(this.userService.getUserById(this.teacherService.getByIdTeacher(3).getuserIdUser()));
+	}
+	
+	
 	@GetMapping(value = "/teacher")
 	public ResponseEntity<List<User>> getAllTeacher(){
 		List<User> teacherList = new ArrayList<User>();
-		this.teacherService.getAllTeacher().forEach(teacher -> teacherList.add(this.userService.getUserById(teacher.getuser_id_user())));
+		this.teacherService.getAllTeacher().forEach(teacher -> teacherList.add(this.userService.getUserById(teacher.getuserIdUser())));
 		
 		return ResponseEntity.ok().body(teacherList);
 	}

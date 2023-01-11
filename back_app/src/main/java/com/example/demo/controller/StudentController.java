@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Student;
@@ -37,15 +38,24 @@ public class StudentController {
 	}
 		
 	@DeleteMapping("/student/{id}")
-	public HttpStatus deleteStudent(@PathVariable Integer id){
-		this.studentService.deleteStudent(id);
+	public HttpStatus deleteStudent(@PathVariable Integer id_student){
+		this.studentService.deleteStudent(id_student);
+		
 		return HttpStatus.OK;
 	}
+	
+	@GetMapping(value = "/student/{id}")
+	public @ResponseBody ResponseEntity<User> getStudentById(@PathVariable Integer id_student){
+		
+		
+		return ResponseEntity.ok().body((this.userService.getUserById(this.studentService.getStudentById(id_student).getuserIdUser())));
+	}
+	
 
 	@GetMapping(value = "/student")
 	public ResponseEntity<List<User>> getAllStudent(){
 		List<User> studentList = new ArrayList<User>();
-		this.studentService.getAllStudent().forEach(student -> studentList.add(this.userService.getUserById(student.getuser_id_user())));
+		this.studentService.getAllStudent().forEach(student -> studentList.add(this.userService.getUserById(student.getuserIdUser())));
 		return ResponseEntity.ok().body(studentList);
 	}
 

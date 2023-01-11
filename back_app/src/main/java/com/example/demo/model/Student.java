@@ -2,47 +2,52 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 
+import com.example.demo.model.doublekey.StudentId;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="student")
+@IdClass(StudentId.class)
 public class Student implements Serializable {
 	
 	@Id
     @Column(name = "user_id_user")
-	private Integer user_id_user;
+	private Integer userIdUser;
 	
+	@Id
 	@Column(name = "id_student")
-	private String id_student;
+	private Integer idStudent;
 	
 	public Student() {
 		super();
 	}
 	
-	public Student(Integer user_id_user) {
+	public Student(Integer userIdUser) {
 		super();
-		this.user_id_user = user_id_user;
+		this.userIdUser = userIdUser;
 	}
 
-	public Integer getuser_id_user() {
-		return this.user_id_user;
+	public Integer getuserIdUser() {
+		return this.userIdUser;
 	}
 
-	public void setuser_id_user(Integer user_id_user) {
-		this.user_id_user = user_id_user;
+	public void setuserIdUser(Integer userIdUser) {
+		this.userIdUser = userIdUser;
 	}
 
-	public String getid_student() {
-		return id_student;
+	public Integer getid_student() {
+		return idStudent;
 	}
 
-	public void setid_student(String id_student) {
-		this.id_student = id_student;
+	public void setid_student(Integer id_student) {
+		this.idStudent = id_student;
 	}
 
 
