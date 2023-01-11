@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Subject;
+import com.example.demo.service.SpecialityService;
 import com.example.demo.service.SubjectService;
 
 @RestController
@@ -27,7 +28,6 @@ public class SubjectController {
 	@Autowired
 	private SubjectService subjectService;
 
-
 	
 	@PostMapping("/subject")
 	public ResponseEntity<Subject> createSubject (@RequestBody Subject subject) {
@@ -37,15 +37,10 @@ public class SubjectController {
 
 	@PutMapping("subject/{id}")
 	public ResponseEntity<Subject> updateSubject(@PathVariable Integer id, @RequestBody Subject subject) {
-		// Subject st = new Subject("Stephanelenul");
-		// st.setIdSubject(203);
-		// return ResponseEntity.ok().body(this.subjectService.updateSubject(st));
-
 		subject.setIdSubject(id);
 		return ResponseEntity.ok().body(this.subjectService.updateSubject(subject));
 
 	}
-
 
 	@DeleteMapping("/subject/{id}")
 	public HttpStatus deleteSubject(@PathVariable Integer id){
@@ -62,5 +57,6 @@ public class SubjectController {
 	public ResponseEntity<List<Subject>> getAllSubject(){
 		return ResponseEntity.ok().body(subjectService.getAllSubject());
 	}
+	
 
 }
