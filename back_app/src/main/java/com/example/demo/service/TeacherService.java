@@ -19,7 +19,11 @@ public class TeacherService {
 	}
 	
 	public void deleteTeacher(Integer idTeacher) {
-		this.teacherRepository.deleteById(idTeacher);
+		this.teacherRepository.deleteByIdTeacher(idTeacher);
+	}
+	
+	public Teacher getByIdTeacher(Integer idTeacher) {
+		return this.teacherRepository.findByIdTeacher(idTeacher);
 	}
 	
 	public List<Teacher> getAllTeacher(){
