@@ -18,20 +18,21 @@ public class SubjectService {
 	private SubjectRepository subjectRepository;
 
 	public Subject createSubject(Subject subject) {
-		System.out.println(subject.getNameSubject());
 		return this.subjectRepository.save(subject);
 	}
 
 	public Subject updateSubject(Subject subject) {
 		Optional<Subject> subjectDb = this.subjectRepository.findById(subject.getIdSubject());
-		
 		Subject subjectUpdate = subjectDb.get();
-				
 		subjectUpdate.setIdSubject(subject.getIdSubject());
 		subjectUpdate.setNameSubject(subject.getNameSubject());
-
 		subjectRepository.save(subjectUpdate);
+		
 		return subjectUpdate;
+	}
+	
+	public void deleteSubject(Integer id) {
+		this.subjectRepository.deleteById(id);
 	}
 
 	public List<Subject> getAllSubject() {
@@ -39,14 +40,7 @@ public class SubjectService {
 	}
 
 	public Subject getSubjectById(Integer subjectId) {
-		
 		return this.subjectRepository.findById(subjectId).get();
-		
 	}
 
-	
-	public void deleteSubject(Integer id) {
-		this.subjectRepository.deleteById(id);
-
-	}
 }

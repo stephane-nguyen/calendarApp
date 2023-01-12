@@ -27,16 +27,11 @@ public class SubjectController {
 	@Autowired
 	private SubjectService subjectService;
 
-	@GetMapping(value = "/subject")
-	public ResponseEntity<List<Subject>> getAllSubject() {
-		return ResponseEntity.ok().body(subjectService.getAllSubject());
-	}
 
-	@GetMapping(value = "/subject/{id}")
-	public @ResponseBody ResponseEntity<Subject> getSubject(@PathVariable Integer id) {
-		// return ResponseEntity.ok().body(subjectService.getSubjectById(203));
-
-		return ResponseEntity.ok().body(subjectService.getSubjectById(id));
+	
+	@PostMapping("/subject")
+	public ResponseEntity<Subject> createSubject (@RequestBody Subject subject) {
+		return ResponseEntity.ok().body(this.subjectService.createSubject(subject));
 
 	}
 
@@ -51,19 +46,21 @@ public class SubjectController {
 
 	}
 
-	@PostMapping("/subject")
-	public ResponseEntity<Subject> createSubject(@RequestBody Subject s) {
-		// Subject st = new Subject("tefdsqfsqst");
-		// return ResponseEntity.ok().body(this.subjectService.createSubject(st));
-
-		return ResponseEntity.ok().body(this.subjectService.createSubject(s));
-	}
 
 	@DeleteMapping("/subject/{id}")
-	public HttpStatus deleteProduct(@PathVariable Integer id) {
-		// this.subjectService.deleteSubject(203);
-
+	public HttpStatus deleteSubject(@PathVariable Integer id){
 		this.subjectService.deleteSubject(id);
 		return HttpStatus.OK;
 	}
+	
+	@GetMapping(value = "/subject/{id}")
+	public @ResponseBody ResponseEntity<Subject> getSubject(@PathVariable Integer id){
+		return ResponseEntity.ok().body(subjectService.getSubjectById(id));
+	}
+
+	@GetMapping(value = "/subject")
+	public ResponseEntity<List<Subject>> getAllSubject(){
+		return ResponseEntity.ok().body(subjectService.getAllSubject());
+	}
+
 }

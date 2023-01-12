@@ -25,6 +25,23 @@ import com.example.demo.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@PostMapping("/user")
+	public ResponseEntity<User> createUser(@RequestBody User s) {
+		return ResponseEntity.ok().body(this.userService.createUser(s));
+	}
+	
+	@PutMapping("user/{id}")
+	public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
+		user.setIdUser(id);
+		return ResponseEntity.ok().body(this.userService.updateUser(user));
+	}
+
+	@DeleteMapping("/user/{id}")
+	public HttpStatus deleteUser(@PathVariable Integer id) {
+		this.userService.deleteUser(id);
+		return HttpStatus.OK;
+	}
 
 	@GetMapping(value = "/user")
 	public ResponseEntity<List<User>> getAllUser() {
@@ -33,36 +50,7 @@ public class UserController {
 
 	@GetMapping(value = "/user/{id}")
 	public @ResponseBody ResponseEntity<User> getUser(@PathVariable Integer id) {
-
-		// System.out.println(id);
 		return ResponseEntity.ok().body(userService.getUserById(id));
-
 	}
-
-	@PutMapping("user/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
-
-		user.setIdUser(id);
-		return ResponseEntity.ok().body(this.userService.updateUser(user));
-
-	}
-
-	@PostMapping("/user")
-	public ResponseEntity<User> createUser(@RequestBody User s) {
-		// User st = new User("tefdsqfsqst", "tesssfdsqf", "tata@gmail.com",
-		// "fdqfdsqfsdq");
-		// return ResponseEntity.ok().body(this.userService.createUser(st));
-
-		return ResponseEntity.ok().body(this.userService.createUser(s));
-
-	}
-
-	@DeleteMapping("/user/{id}")
-	public HttpStatus deleteProduct(@PathVariable Integer id) {
-		// this.userService.deleteUser(1);
-
-		this.userService.deleteUser(id);
-		return HttpStatus.OK;
-	}
-
+	
 }
