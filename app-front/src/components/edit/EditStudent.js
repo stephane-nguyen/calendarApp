@@ -2,43 +2,42 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../api/baseURL";
 
-export default function EditUser() {
+export default function EditStudent() {
   let navigate = useNavigate();
 
   const { id } = useParams();
 
-  const [user, setUser] = useState({
+  const [student, setStudent] = useState({
     firstname: "",
     lastname: "",
     email: "",
   });
 
-  const { firstname, lastname, email } = user;
+  const { firstname, lastname, email } = student;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    loadUser();
+    const loadStudent = async () => {
+      const result = await api.get(`/user/${id}`);
+      setStudent(result.data);
+    };
+    loadStudent();
   }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await api.put(`user/${id}`, user);
-    navigate("/user");
-  };
-
-  const loadUser = async () => {
-    const result = await api.get(`/user/${id}`);
-    setUser(result.data);
+    await api.put(`user/${id}`, student);
+    navigate("/student");
   };
 
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6 border rounded p-4 mt-5 shadow">
-          <h2 className="text-center m-4">Edit User</h2>
+          <h2 className="text-center m-4">Edit student</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-group">
@@ -84,7 +83,7 @@ export default function EditUser() {
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
-              <Link className="btn btn-danger" to="/user">
+              <Link className="btn btn-danger" to="/student">
                 Cancel
               </Link>
             </div>

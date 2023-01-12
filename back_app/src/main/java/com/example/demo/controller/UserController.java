@@ -25,12 +25,12 @@ import com.example.demo.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
+
 	@PostMapping("/user")
-	public ResponseEntity<User> createUser(@RequestBody User s) {
-		return ResponseEntity.ok().body(this.userService.createUser(s));
+	public ResponseEntity<User> createUser(@RequestBody User newUser) {
+		return ResponseEntity.ok().body(this.userService.createUser(newUser));
 	}
-	
+
 	@PutMapping("user/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
 		user.setIdUser(id);
@@ -43,14 +43,24 @@ public class UserController {
 		return HttpStatus.OK;
 	}
 
+	@GetMapping(value = "/user/{id}")
+	public @ResponseBody ResponseEntity<User> getUser(@PathVariable Integer id) {
+		return ResponseEntity.ok().body(userService.getUserById(id));
+	}
+
+	@GetMapping(value = "/student")
+	public ResponseEntity<List<User>> getAllStudents() {
+		return ResponseEntity.ok().body(userService.getUsersByRole(1));
+	}
+
+	@GetMapping(value = "/teacher")
+	public ResponseEntity<List<User>> getAllTeachers() {
+		return ResponseEntity.ok().body(userService.getUsersByRole(2));
+	}
+
 	@GetMapping(value = "/user")
 	public ResponseEntity<List<User>> getAllUser() {
 		return ResponseEntity.ok().body(userService.getAllUser());
 	}
 
-	@GetMapping(value = "/user/{id}")
-	public @ResponseBody ResponseEntity<User> getUser(@PathVariable Integer id) {
-		return ResponseEntity.ok().body(userService.getUserById(id));
-	}
-	
 }
