@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 jan. 2023 à 14:04
+-- Généré le : jeu. 12 jan. 2023 à 20:52
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -29,23 +29,23 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `exam`;
 CREATE TABLE IF NOT EXISTS `exam` (
-  `idExam` int(11) NOT NULL AUTO_INCREMENT,
-  `startDate` datetime NOT NULL,
+  `id_exam` int(11) NOT NULL AUTO_INCREMENT,
   `duration` int(11) NOT NULL,
-  `Subjects_idSubject` int(11) NOT NULL,
-  `Room_idRoom` int(11) NOT NULL,
-  PRIMARY KEY (`idExam`),
-  KEY `fk_Exam_Subjects1_idx` (`Subjects_idSubject`),
-  KEY `fk_Exam_Room1_idx` (`Room_idRoom`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `subjects_id_subjects` int(11) NOT NULL,
+  `room_id_room` int(11) NOT NULL,
+  `start_date` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id_exam`),
+  KEY `fk_Exam_Subjects1_idx` (`subjects_id_subjects`),
+  KEY `fk_Exam_Room1_idx` (`room_id_room`)
+) ENGINE=InnoDB AUTO_INCREMENT=353 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `exam`
 --
 
-INSERT INTO `exam` (`idExam`, `startDate`, `duration`, `Subjects_idSubject`, `Room_idRoom`) VALUES
-(1, '2022-12-12 09:00:00', 2, 1, 1),
-(2, '2022-12-12 13:30:00', 3, 5, 2);
+INSERT INTO `exam` (`id_exam`, `duration`, `subjects_id_subjects`, `room_id_room`, `start_date`) VALUES
+(1, 2, 1, 1, '2023-01-11 10:32:08.000000'),
+(2, 3, 5, 2, '2023-01-26 10:32:39.000000');
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequences` (
 --
 
 INSERT INTO `hibernate_sequences` (`sequence_name`, `next_val`) VALUES
-('default', 400);
+('default', 450);
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `room` (
   `id_room` int(11) NOT NULL AUTO_INCREMENT,
   `capacity` int(11) NOT NULL,
   PRIMARY KEY (`id_room`)
-) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `room`
