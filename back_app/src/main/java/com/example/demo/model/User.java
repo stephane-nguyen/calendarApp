@@ -12,17 +12,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
-    @Id
-    @Column(name = "id_user")
-    @GeneratedValue(strategy = GenerationType.TABLE)
+	@Id
+	@Column(name = "id_user")
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Integer idUser;
-    
+
 	private String firstname;
 	private String lastname;
 	private String email;
 	private String password;
 	private Integer role;
-	
+
 	public User() {
 		super();
 	}
@@ -90,6 +90,5 @@ public class User implements Serializable {
 		return "User [idUser=" + idUser + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
 				+ ", password=" + password + ", role=" + role + "]";
 	}
-
 
 }
