@@ -2,21 +2,18 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import api from "../../api/baseURL";
 
-const AddAgenda = ({ closeModal }) => {
+const AddAgenda = ({ exams, setExams, closeModal }) => {
   const [exam, setExam] = useState({ title: "", start: "", end: "" });
   // const [exam, setExam] = useState({ title: "", start: "", end: "", room: "" });
 
   const { title, start, end } = exam;
   // const { title, start, end, room } = exam;
 
-  const onInputChange = (e) => {
-    setExam({ ...exam, [e.target.name]: e.target.value });
-  };
-
   const addExam = async (e, closeModal) => {
     e.preventDefault();
     try {
       await api.post("/exam", exam);
+      setExam([...exams, exam]);
       closeModal();
     } catch (error) {
       console.log(`error: ${error.message}`);
@@ -42,7 +39,9 @@ const AddAgenda = ({ closeModal }) => {
                       name="title"
                       className="form-control"
                       value={title}
-                      onChange={(e) => onInputChange(e)}
+                      onChange={(e) =>
+                        setExams({ ...exam, title: e.target.value })
+                      }
                     />
                   </div>
                   <div className="form-group">
@@ -52,7 +51,7 @@ const AddAgenda = ({ closeModal }) => {
                       timeFormat="HH:mm"
                       dateFormat="MMMM d, yyyy h:mm aa"
                       selected={start}
-                      onChange={(e) => onInputChange(e)}
+                      onChange={(e) => setExams({ ...exam, start: start })}
                     />
                   </div>
                   <div className="form-group">
@@ -62,24 +61,28 @@ const AddAgenda = ({ closeModal }) => {
                       timeFormat="HH:mm"
                       dateFormat="MMMM d, yyyy h:mm aa"
                       selected={end}
-                      onChange={(e) => onInputChange(e)}
+                      onChange={(e) => setExams({ ...exam, end: end })}
                     />
                   </div>
-
+                  {/* 
                   <div className="form-group">
-                    <select onChange={(e) => onInputChange(e)}>
-                      {/* {rooms
+                    <select
+                      onChange={(e) =>
+                        setExams({ ...exam, room: e.target.value })
+                      }
+                    >
+                      {rooms
                         ? rooms.map((room) => {
                             <option key={room.id} value={room.id}>
                               {room.id}
                             </option>;
                           })
-                        : null} */}
+                        : null}
                     </select>
-                  </div>
+                  </div> */}
 
                   <button type="submit" className="btn btn-primary btn-block">
-                    Add
+                    Submit
                   </button>
                   <button
                     className="btn btn-danger btn-block"

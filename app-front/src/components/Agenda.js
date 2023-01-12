@@ -90,7 +90,11 @@ function Agenda() {
         </button>
 
         <Modal open={isAddExamOpen}>
-          <AddAgenda closeModal={() => setIsAddExamOpen(false)} />
+          <AddAgenda
+            exams={exams}
+            setExams={setExams}
+            closeModal={() => setIsAddExamOpen(false)}
+          />
         </Modal>
         <Modal open={isEditExamOpen}>
           <EditAgenda
