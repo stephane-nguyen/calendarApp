@@ -26,18 +26,19 @@ import com.example.demo.service.ExamService;
 public class ExamController {
 	@Autowired
 	private ExamService examService;
-	
+
 	@GetMapping("/exam")
-	public ResponseEntity<List<Exam>> getAllExam(){
+	public ResponseEntity<List<Exam>> getAllExam() {
 		return ResponseEntity.ok().body(examService.getAllExam());
 	}
+
 	@PostMapping("/exam")
-	public ResponseEntity<Exam> createExam(@RequestBody Exam exam){
-		//@RequestBody Exam exam
-		//Date date = new Date();
-		//Exam exam = new Exam(date, 1, 2, 3);
+	public ResponseEntity<Exam> createExam(@RequestBody Exam exam) {
+		// Date date = new Date();
+		// Exam exam = new Exam(date, 1, 2, 3);
 		return ResponseEntity.ok().body(this.examService.createExam(exam));
 	}
+
 	@DeleteMapping("/exam/{id}")
 	public HttpStatus deleteExam(@PathVariable Integer id) {
 		this.examService.deleteExam(id);

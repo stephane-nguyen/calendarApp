@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `exam`;
 CREATE TABLE IF NOT EXISTS `exam` (
   `id_exam` int(11) NOT NULL AUTO_INCREMENT,
-  `duration` int(11) NOT NULL,
   `subjects_id_subjects` int(11) NOT NULL,
   `room_id_room` int(11) NOT NULL,
   `start_date` datetime(6) DEFAULT NULL,
@@ -43,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `exam` (
 -- Déchargement des données de la table `exam`
 --
 
-INSERT INTO `exam` (`id_exam`, `duration`, `subjects_id_subjects`, `room_id_room`, `start_date`) VALUES
+INSERT INTO `exam` (`id_exam`, `subjects_id_subjects`, `room_id_room`, `start_date`) VALUES
 (1, 2, 1, 1, '2023-01-11 10:32:08.000000'),
 (2, 3, 5, 2, '2023-01-26 10:32:39.000000');
 
