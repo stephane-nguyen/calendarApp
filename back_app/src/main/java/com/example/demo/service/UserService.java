@@ -23,6 +23,7 @@ public class UserService {
 	}
 
 	public User updateUser(@RequestBody User user) {
+		
 		Optional<User> userDb = this.userRepository.findById(user.getIdUser());
 		User userUpdate = userDb.get();
 		userUpdate.setIdUser(user.getIdUser());
@@ -30,9 +31,11 @@ public class UserService {
 		userUpdate.setLastname(user.getLastname());
 		userUpdate.setEmail(user.getEmail());
 		userUpdate.setPassword(user.getPassword());
+		userUpdate.setRole(user.getRole());
 		userRepository.save(userUpdate);
 		
 		return userUpdate;
+		
 	}
 
 	public List<User> getAllUser() {

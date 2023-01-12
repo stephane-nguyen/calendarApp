@@ -27,12 +27,13 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/user")
-	public ResponseEntity<User> createUser(@RequestBody User s) {
-		return ResponseEntity.ok().body(this.userService.createUser(s));
+	public ResponseEntity<User> createUser(@RequestBody User newUser) {
+		return ResponseEntity.ok().body(this.userService.createUser(newUser));
 	}
 
 	@PutMapping("user/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
+
 		user.setIdUser(id);
 		return ResponseEntity.ok().body(this.userService.updateUser(user));
 	}
@@ -50,12 +51,12 @@ public class UserController {
 
 	@GetMapping(value = "/student")
 	public ResponseEntity<List<User>> getAllStudents() {
-		return ResponseEntity.ok().body(userService.getUsersByRole(2));
+		return ResponseEntity.ok().body(userService.getUsersByRole(1));
 	}
 
 	@GetMapping(value = "/teacher")
 	public ResponseEntity<List<User>> getAllTeachers() {
-		return ResponseEntity.ok().body(userService.getUsersByRole(3));
+		return ResponseEntity.ok().body(userService.getUsersByRole(2));
 	}
 
 	@GetMapping(value = "/user")
