@@ -1,16 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import api from "../api/baseURL";
-import UserList from "./list/UserList";
+import StudentList from "./list/StudentList";
 
-function User() {
-  const [users, setUsers] = useState([]);
+function Student() {
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    const getAllUsers = async () => {
+    const getAllStudents = async () => {
       try {
-        const response = await api.get("/user");
-        setUsers(response.data);
+        const response = await api.get("/student");
+        setStudents(response.data);
       } catch (err) {
         //not in 200 range status code
         if (err.response) {
@@ -22,13 +22,13 @@ function User() {
         }
       }
     };
-    getAllUsers();
+    getAllStudents();
   }, []);
 
-  const deleteUser = async (id) => {
+  const deleteStudent = async (id) => {
     try {
       await api.delete(`user/${id}`);
-      setUsers(users.filter((user) => user.idUser !== id));
+      setStudents(students.filter((student) => student.id_student !== id));
     } catch (err) {
       console.log(`error: ${err.message}`);
     }
@@ -36,9 +36,9 @@ function User() {
 
   return (
     <>
-      <UserList users={users} deleteUser={deleteUser} />
+      <StudentList students={students} deleteStudent={deleteStudent} />
     </>
   );
 }
 
-export default User;
+export default Student;

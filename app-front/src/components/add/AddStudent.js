@@ -1,74 +1,64 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../api/baseURL";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function EditUser() {
+export default function AddStudent() {
   let navigate = useNavigate();
 
-  const { id } = useParams();
-
-  const [user, setUser] = useState({
+  const [student, setStudent] = useState({
     firstname: "",
     lastname: "",
     email: "",
+    password: "",
   });
 
-  const { firstname, lastname, email } = user;
+  const { firstname, lastname, email, password } = student;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    loadUser();
-  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await api.put(`user/${id}`, user);
-    navigate("/user");
-  };
-
-  const loadUser = async () => {
-    const result = await api.get(`/user/${id}`);
-    setUser(result.data);
+    await api.post("/student", student);
+    navigate("/student");
   };
 
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6 border rounded p-4 mt-5 shadow">
-          <h2 className="text-center m-4">Edit User</h2>
+          <h2 className="text-center m-4">Add student</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-group">
-              <label htmlFor="Firstname" className="form-label">
-                Firstname
+              <label htmlFor="firstname" className="form-label">
+                First Name
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your firstname"
+                placeholder="Enter your first name"
                 name="firstname"
                 value={firstname}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Lastname" className="form-label">
-                Lastname
+              <label htmlFor="lastname" className="form-label">
+                Last Name
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your lastname"
+                placeholder="Enter your last name"
                 name="lastname"
                 value={lastname}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Email" className="form-label">
+              <label htmlFor="email" className="form-label">
                 E-mail
               </label>
               <input
@@ -80,11 +70,24 @@ export default function EditUser() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter your password"
+                name="password"
+                value={password}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
             <div className="form-group d-flex justify-content-between">
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
-              <Link className="btn btn-danger" to="/user">
+              <Link className="btn btn-danger" to="/student">
                 Cancel
               </Link>
             </div>
