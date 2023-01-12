@@ -27,7 +27,7 @@ function Student() {
 
   const deleteStudent = async (id) => {
     try {
-      await api.delete(`student/${id}`);
+      await api.delete(`user/${id}`);
       setStudents(students.filter((student) => student.id_student !== id));
     } catch (err) {
       console.log(`error: ${err.message}`);

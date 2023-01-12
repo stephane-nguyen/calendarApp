@@ -25,14 +25,12 @@ import com.example.demo.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
+
 	@PostMapping("/user")
-	public ResponseEntity<User> createUser( User s) {
-		User st = new User(null, "tata", "toto", "toto", "tatata", 2);
-		
-		return ResponseEntity.ok().body(this.userService.createUser(st));
+	public ResponseEntity<User> createUser(@RequestBody User s) {
+		return ResponseEntity.ok().body(this.userService.createUser(s));
 	}
-	
+
 	@PutMapping("user/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
 		user.setIdUser(id);
@@ -44,17 +42,17 @@ public class UserController {
 		this.userService.deleteUser(id);
 		return HttpStatus.OK;
 	}
-	
+
 	@GetMapping(value = "/user/{id}")
 	public @ResponseBody ResponseEntity<User> getUser(@PathVariable Integer id) {
 		return ResponseEntity.ok().body(userService.getUserById(id));
 	}
-	
+
 	@GetMapping(value = "/student")
 	public ResponseEntity<List<User>> getAllStudents() {
 		return ResponseEntity.ok().body(userService.getUsersByRole(2));
 	}
-	
+
 	@GetMapping(value = "/teacher")
 	public ResponseEntity<List<User>> getAllTeachers() {
 		return ResponseEntity.ok().body(userService.getUsersByRole(3));
@@ -65,6 +63,4 @@ public class UserController {
 		return ResponseEntity.ok().body(userService.getAllUser());
 	}
 
-
-	
 }

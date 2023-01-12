@@ -21,7 +21,7 @@ export default function EditStudent() {
 
   useEffect(() => {
     const loadStudent = async () => {
-      const result = await api.get(`/student/${id}`);
+      const result = await api.get(`/user/${id}`);
       setStudent(result.data);
     };
     loadStudent();
@@ -29,7 +29,7 @@ export default function EditStudent() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await api.put(`student/${id}`, student);
+    await api.put(`user/${id}`, student);
     navigate("/student");
   };
 

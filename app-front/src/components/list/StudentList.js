@@ -10,6 +10,7 @@ const StudentList = ({ students, deleteStudent }) => {
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
+            <th>id user</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
@@ -18,12 +19,13 @@ const StudentList = ({ students, deleteStudent }) => {
         </thead>
         <tbody>
           {students.map((student) => (
-            <tr key={student.idStudent}>
+            <tr key={student.idUser}>
+              <td>{student.idUser}</td>
               <td>{student.firstname}</td>
               <td>{student.lastname}</td>
               <td>{student.email}</td>
               <td>
-                <Link to={`/student/${student.idStudent}`}>
+                <Link to={`/student/${student.idUser}`}>
                   <button
                     className="btn btn-success btn-sm rounded-0 mr-1"
                     type="button"
@@ -35,7 +37,7 @@ const StudentList = ({ students, deleteStudent }) => {
                   </button>
                 </Link>
                 <button
-                  onClick={() => deleteStudent(student.idStudent)}
+                  onClick={() => deleteStudent(student.idUser)}
                   className="btn btn-danger btn-sm rounded-0"
                   type="button"
                   data-toggle="tooltip"
