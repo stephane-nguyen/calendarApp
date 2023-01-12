@@ -33,7 +33,6 @@ public class UserController {
 
 	@PutMapping("user/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
-
 		user.setIdUser(id);
 		return ResponseEntity.ok().body(this.userService.updateUser(user));
 	}
