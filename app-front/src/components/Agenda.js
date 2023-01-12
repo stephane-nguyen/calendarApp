@@ -86,7 +86,7 @@ function Agenda() {
           className="btn btn-primary mt-3"
           onClick={() => setIsAddExamOpen(true)}
         >
-          Add Event
+          Add Exam
         </button>
 
         <Modal open={isAddExamOpen}>

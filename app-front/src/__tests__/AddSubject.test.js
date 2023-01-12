@@ -8,8 +8,7 @@ const subjects = [
 ];
 
 const setIsAddOpen = jest.fn();
-const setIsEditOpen = jest.fn();
-const deleteSubject = jest.fn();
+const setSubjects = jest.fn();
 
 describe("click the submit button for subject's add modal", () => {
   it("should render form correctly", () => {

@@ -19,38 +19,36 @@ const AddSubject = ({ subjects, setSubjects, closeModal }) => {
   };
 
   return (
-    <div data-testid="add-modal">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="card">
-              <h3 className="card-header text-center">New subject</h3>
-              <div className="card-body">
-                <form onSubmit={(e) => addSubject(e, closeModal)}>
-                  <div className="form-group">
-                    <label htmlFor="nameSubject" className="form-label">
-                      Subject Name
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter your subject"
-                      name="nameSubject"
-                      className="form-control"
-                      value={nameSubject}
-                      onChange={(e) => setNameSubject(e.target.value)}
-                    />
-                  </div>
-                  <button type="submit" className="btn btn-primary btn-block">
-                    Add
-                  </button>
-                  <button
-                    className="btn btn-danger btn-block"
-                    onClick={closeModal}
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card">
+            <h3 className="card-header text-center">New subject</h3>
+            <div className="card-body">
+              <form onSubmit={(e) => addSubject(e, closeModal)}>
+                <div className="form-group">
+                  <label htmlFor="nameSubject" className="form-label">
+                    Subject Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter your subject"
+                    name="nameSubject"
+                    className="form-control"
+                    value={nameSubject}
+                    onChange={(e) => setNameSubject(e.target.value)}
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block">
+                  Add
+                </button>
+                <button
+                  className="btn btn-danger btn-block"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+              </form>
             </div>
           </div>
         </div>
