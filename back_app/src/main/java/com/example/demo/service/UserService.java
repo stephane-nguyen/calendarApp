@@ -38,6 +38,10 @@ public class UserService {
 	public List<User> getAllUser() {
 		return this.userRepository.findAll();
 	}
+	
+	public List<User> getUsersByRole(Integer role){
+		return this.userRepository.findByRole(role);
+	}
 
 	public User getUserById(Integer userId) {
 		return this.userRepository.findById(userId).get();

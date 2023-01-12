@@ -27,8 +27,10 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/user")
-	public ResponseEntity<User> createUser(@RequestBody User s) {
-		return ResponseEntity.ok().body(this.userService.createUser(s));
+	public ResponseEntity<User> createUser( User s) {
+		User st = new User(null, "tata", "toto", "toto", "tatata", 2);
+		
+		return ResponseEntity.ok().body(this.userService.createUser(st));
 	}
 	
 	@PutMapping("user/{id}")
@@ -42,15 +44,27 @@ public class UserController {
 		this.userService.deleteUser(id);
 		return HttpStatus.OK;
 	}
+	
+	@GetMapping(value = "/user/{id}")
+	public @ResponseBody ResponseEntity<User> getUser(@PathVariable Integer id) {
+		return ResponseEntity.ok().body(userService.getUserById(id));
+	}
+	
+	@GetMapping(value = "/student")
+	public ResponseEntity<List<User>> getAllStudents() {
+		return ResponseEntity.ok().body(userService.getUsersByRole(2));
+	}
+	
+	@GetMapping(value = "/teacher")
+	public ResponseEntity<List<User>> getAllTeachers() {
+		return ResponseEntity.ok().body(userService.getUsersByRole(3));
+	}
 
 	@GetMapping(value = "/user")
 	public ResponseEntity<List<User>> getAllUser() {
 		return ResponseEntity.ok().body(userService.getAllUser());
 	}
 
-	@GetMapping(value = "/user/{id}")
-	public @ResponseBody ResponseEntity<User> getUser(@PathVariable Integer id) {
-		return ResponseEntity.ok().body(userService.getUserById(id));
-	}
+
 	
 }
