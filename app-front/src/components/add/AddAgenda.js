@@ -64,6 +64,16 @@ const AddAgenda = ({ exams, setExams, closeModal }) => {
                       onChange={(e) => setExams({ ...exam, end: end })}
                     />
                   </div>
+                  <div className="form-group">
+                    <DatePicker
+                      placeholderText="End date"
+                      showTimeSelect
+                      timeFormat="HH:mm"
+                      dateFormat="MMMM d, yyyy h:mm aa"
+                      selected={end}
+                      onChange={(e) => setExams({ ...exam, end: end })}
+                    />
+                  </div>
                   {/* 
                   <div className="form-group">
                     <select

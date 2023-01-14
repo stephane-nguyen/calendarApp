@@ -24,24 +24,24 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const events = [
-  {
-    title: "maths",
-    allDay: true,
-    start: new Date(),
-    end: new Date(2022, 12, 0),
-  },
-  {
-    title: "histoire",
-    start: new Date(2023, 1, 3),
-    end: new Date(2023, 1, 6),
-  },
-  {
-    title: "français",
-    start: new Date(2022, 12, 0),
-    end: new Date(2022, 12, 0),
-  },
-];
+// const events = [
+//   {
+//     title: "maths",
+//     allDay: true,
+//     start: new Date(),
+//     end: new Date(2022, 12, 0),
+//   },
+//   {
+//     title: "histoire",
+//     start: new Date(2023, 1, 3),
+//     end: new Date(2023, 1, 6),
+//   },
+//   {
+//     title: "français",
+//     start: new Date(2022, 12, 0),
+//     end: new Date(2022, 12, 0),
+//   },
+// ];
 
 function Agenda() {
   const [exams, setExams] = useState([]);
