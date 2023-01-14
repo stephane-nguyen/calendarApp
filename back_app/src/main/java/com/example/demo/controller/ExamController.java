@@ -36,6 +36,7 @@ public class ExamController {
 	public ResponseEntity<Exam> createExam(@RequestBody Exam exam) {
 		// Date date = new Date();
 		// Exam exam = new Exam(date, 1, 2, 3);
+
 		return ResponseEntity.ok().body(this.examService.createExam(exam));
 	}
 
