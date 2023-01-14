@@ -27,8 +27,8 @@ public class LoginController {
 	public ResponseEntity<User> login(HttpServletResponse response) {
 	//@RequestParam String username, @RequestParam String password,  HttpServletResponse response
 	//@RequestParam String username, @RequestParam String password, 
-	String username ="tata123@gmail.com";
-	String password = "123";
+	String username ="peeta@gore.fr";
+	String password = "pythagore";
 	return ResponseEntity.ok().body(this.loginService.loginUser(username, password, response));
 	}
 	

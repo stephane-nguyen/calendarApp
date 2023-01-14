@@ -17,7 +17,7 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-
+	
 	public User createUser(@RequestBody User user) {
 		user.setRole(1);
 		return this.userRepository.save(user);
