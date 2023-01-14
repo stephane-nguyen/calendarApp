@@ -19,10 +19,12 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public User createUser(@RequestBody User user) {
+		user.setRole(1);
 		return this.userRepository.save(user);
 	}
 
 	public User updateUser(@RequestBody User user) {
+
 		Optional<User> userDb = this.userRepository.findById(user.getIdUser());
 		User userUpdate = userDb.get();
 		userUpdate.setIdUser(user.getIdUser());
@@ -30,13 +32,19 @@ public class UserService {
 		userUpdate.setLastname(user.getLastname());
 		userUpdate.setEmail(user.getEmail());
 		userUpdate.setPassword(user.getPassword());
+		userUpdate.setRole(user.getRole());
 		userRepository.save(userUpdate);
-		
+
 		return userUpdate;
+
 	}
 
 	public List<User> getAllUser() {
 		return this.userRepository.findAll();
+	}
+
+	public List<User> getUsersByRole(Integer role) {
+		return this.userRepository.findByRole(role);
 	}
 
 	public User getUserById(Integer userId) {

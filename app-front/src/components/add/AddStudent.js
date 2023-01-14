@@ -2,33 +2,33 @@ import api from "../../api/baseURL";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function AddUser() {
+export default function AddStudent() {
   let navigate = useNavigate();
 
-  const [user, setUser] = useState({
+  const [student, setStudent] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
   });
 
-  const { firstname, lastname, email, password } = user;
+  const { firstname, lastname, email, password } = student;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await api.post("/user", user);
-    navigate("/user");
+    await api.post("/user", student);
+    navigate("/student");
   };
 
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6 border rounded p-4 mt-5 shadow">
-          <h2 className="text-center m-4">Add User</h2>
+          <h2 className="text-center m-4">Add student</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-group">
@@ -87,7 +87,7 @@ export default function AddUser() {
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
-              <Link className="btn btn-danger" to="/user">
+              <Link className="btn btn-danger" to="/student">
                 Cancel
               </Link>
             </div>

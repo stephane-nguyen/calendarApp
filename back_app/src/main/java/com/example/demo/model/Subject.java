@@ -15,10 +15,10 @@ public class Subject implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "idSubject")
+	@Column(name = "id_subject")
 	private Integer idSubject;
 
-	@Column(name = "nameSubject")
+	@Column(name = "name_subject")
 	private String nameSubject;
 
 
