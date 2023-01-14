@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import api from "../../api/baseURL";
 import { parseISO, format } from "date-fns";
+import { handleTimeColor } from "../Agenda";
+
 const AddExam = ({ exams, setExams, closeModal }) => {
   const [exam, setExam] = useState({
     nameSubject: "",
@@ -14,12 +16,6 @@ const AddExam = ({ exams, setExams, closeModal }) => {
   const [rooms, setRooms] = useState([]);
 
   const { nameSubject, startDate, endDate, room } = exam;
-
-  let handleTimeColor = (time) => {
-    return time.getHours() > 7 && time.getHours() < 17
-      ? "text-success"
-      : "text-error";
-  };
 
   useEffect(() => {
     const getAllSubjects = async () => {
@@ -127,7 +123,14 @@ const AddExam = ({ exams, setExams, closeModal }) => {
                     minDate={startDate}
                     timeClassName={handleTimeColor}
                     onChange={(endDate) => {
+                      console.log(endDate.toISOString());
                       console.log(endDate);
+                      console.log(endDate.toLocaleString("en-us"));
+                      console.log(format(endDate, "yyyy-MM-dd HH:mm:ss"));
+                      console.log(
+                        new Date(format(endDate, "yyyy-MM-dd HH:mm:ss"))
+                      );
+
                       setExam({
                         ...exam,
                         endDate: endDate,

@@ -127,3 +127,8 @@ function Agenda() {
 }
 
 export default Agenda;
+export function handleTimeColor(time) {
+  return time.getHours() > 7 && time.getHours() < 17
+    ? "text-success"
+    : "text-error";
+}
