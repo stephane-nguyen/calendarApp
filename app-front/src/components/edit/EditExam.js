@@ -12,14 +12,14 @@ function EditAgenda({ exams, setExams, id, closeModal }) {
   const editExam = async (e, closeModal) => {
     e.preventDefault();
     try {
-      const response = await api.put(`/Exam/${id}`, exam);
+      const response = await api.put(`/exam/${id}`, exam);
       setExams(
         exams.map((exam) =>
           //if not, we keep the Exam as it is because we didnt update it
           exam.idExam === id ? { ...response.data } : exam
         )
       );
-      setExam("");
+      setExam({ title: "", start: "", end: "" });
       closeModal();
     } catch (err) {
       console.log(`error: ${err.message}`);

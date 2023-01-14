@@ -10,9 +10,9 @@ import { useState, useEffect } from "react";
 import api from "../api/baseURL";
 import Modal from "./Modal";
 
-import AddAgenda from "./add/AddAgenda";
-import EditAgenda from "./edit/EditAgenda";
-import AgendaList from "./list/AgendaList";
+import AddExam from "./add/AddExam";
+import EditAgenda from "./edit/EditExam";
+import ExamList from "./list/ExamList";
 
 const locales = { "en-US": require("date-fns/locale/en-US") };
 
@@ -44,10 +44,12 @@ const localizer = dateFnsLocalizer({
 // ];
 
 function Agenda() {
+  //DATA
   const [exams, setExams] = useState([]);
 
   const [id, setId] = useState(null);
 
+  //MODAL
   const [isAddExamOpen, setIsAddExamOpen] = useState(false);
   const [isEditExamOpen, setIsEditExamOpen] = useState(false);
 
@@ -90,7 +92,7 @@ function Agenda() {
         </button>
 
         <Modal open={isAddExamOpen}>
-          <AddAgenda
+          <AddExam
             exams={exams}
             setExams={setExams}
             closeModal={() => setIsAddExamOpen(false)}
@@ -114,7 +116,7 @@ function Agenda() {
         endAccessor="end"
         style={{ height: 500, margin: "50px" }}
       />
-      <AgendaList
+      <ExamList
         exams={exams}
         setId={setId}
         setIsEditExamOpen={setIsEditExamOpen}

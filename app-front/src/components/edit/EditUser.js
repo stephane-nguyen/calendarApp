@@ -20,18 +20,17 @@ export default function EditUser() {
   };
 
   useEffect(() => {
+    const loadUser = async () => {
+      const result = await api.get(`/user/${id}`);
+      setUser(result.data);
+    };
     loadUser();
-  }, []);
+  }, [id]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     await api.put(`user/${id}`, user);
     navigate("/user");
-  };
-
-  const loadUser = async () => {
-    const result = await api.get(`/user/${id}`);
-    setUser(result.data);
   };
 
   return (

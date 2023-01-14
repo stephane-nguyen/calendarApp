@@ -1,6 +1,6 @@
 import React from "react";
 
-function AgendaList({ exams, setId, setIsEditExamOpen, deleteExam }) {
+function ExamList({ exams, setId, setIsEditExamOpen, deleteExam }) {
   return (
     <div className="container mt-1">
       <h2 className="text-center">List of Exams</h2>
@@ -16,7 +16,7 @@ function AgendaList({ exams, setId, setIsEditExamOpen, deleteExam }) {
         </thead>
         <tbody>
           {exams.map((exam) => (
-            <tr key={exam.idExam}>
+            <tr key={exam.id_exam}>
               <td>{exam.title}</td>
               <td>{exam.room}</td>
               <td>{exam.start}</td>
@@ -26,7 +26,7 @@ function AgendaList({ exams, setId, setIsEditExamOpen, deleteExam }) {
                   <li className="list-inline-item">
                     <button
                       onClick={() => {
-                        setId(exam.idExam);
+                        setId(exam.id_exam);
                         setIsEditExamOpen(true);
                       }}
                       className="btn btn-success btn-sm rounded-0"
@@ -40,7 +40,7 @@ function AgendaList({ exams, setId, setIsEditExamOpen, deleteExam }) {
                   </li>
                   <li className="list-inline-item">
                     <button
-                      onClick={() => deleteExam(exam.idExam)}
+                      onClick={() => deleteExam(exam.id_exam)}
                       className="btn btn-danger btn-sm rounded-0"
                       type="button"
                       data-toggle="tooltip"
@@ -60,4 +60,4 @@ function AgendaList({ exams, setId, setIsEditExamOpen, deleteExam }) {
   );
 }
 
-export default AgendaList;
+export default ExamList;
