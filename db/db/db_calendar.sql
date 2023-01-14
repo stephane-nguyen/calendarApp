@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `exam` (
   `subjects_id_subjects` int(11) NOT NULL,
   `room_id_room` int(11) NOT NULL,
   `start_date` datetime(6) DEFAULT NULL,
+  `end_date` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id_exam`),
   KEY `fk_Exam_Subjects1_idx` (`subjects_id_subjects`),
   KEY `fk_Exam_Room1_idx` (`room_id_room`)
@@ -42,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `exam` (
 -- Déchargement des données de la table `exam`
 --
 
-INSERT INTO `exam` (`id_exam`, `subjects_id_subjects`, `room_id_room`, `start_date`) VALUES
-(1, 1, 1, '2023-01-11 10:32:08.000000'),
-(2, 5, 2, '2023-01-26 10:32:39.000000');
+INSERT INTO `exam` (`id_exam`, `subjects_id_subjects`, `room_id_room`, `start_date`, `end_date`) VALUES
+(1, 1, 1, '2023-01-11 10:32:08.000000', '2023-01-11 13:32:08.000000'),
+(2, 5, 2, '2023-01-26 10:32:39.000000', '2023-01-26 11:32:39.000000');
 
 -- --------------------------------------------------------
 
