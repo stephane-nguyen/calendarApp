@@ -7,20 +7,20 @@ function ExamList({ exams, setId, setIsEditExamOpen, deleteExam }) {
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Title</th>
+            <th>Subject Id</th>
             <th>Room</th>
-            <th>Start</th>
-            <th>End</th>
+            <th>startDate</th>
+            <th>endDate</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {exams.map((exam) => (
             <tr key={exam.id_exam}>
-              <td>{exam.title}</td>
-              <td>{exam.room}</td>
-              <td>{exam.start}</td>
-              <td>{exam.end}</td>
+              <td>{exam.subjects_id_subjects}</td>
+              <td>{exam.room_id_room}</td>
+              <td>{exam.startDate}</td>
+              <td>{exam.endDate}</td>
               <td>
                 <ul className="list-inline m-0">
                   <li className="list-inline-item">
