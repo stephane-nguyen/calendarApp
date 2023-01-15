@@ -3,8 +3,8 @@ import api from "../../api/baseURL";
 import DatePicker from "react-datepicker";
 import { handleTimeColor } from "../Agenda";
 
-function EditAgenda({ exams, setExams, id, closeModal }) {
-  const [exam, setExam] = useState({
+function EditAgenda({ allExams, setAllExams, id, closeModal }) {
+  const [newExam, setNewExam] = useState({
     nameSubject: "",
     startDate: null,
     endDate: null,
@@ -14,7 +14,7 @@ function EditAgenda({ exams, setExams, id, closeModal }) {
   const [subjects, setSubjects] = useState([]);
   const [rooms, setRooms] = useState([]);
 
-  const { nameSubject, startDate, endDate, room } = exam;
+  const { nameSubject, startDate, endDate, room } = newExam;
 
   useEffect(() => {
     const getAllSubjects = async () => {
@@ -50,20 +50,25 @@ function EditAgenda({ exams, setExams, id, closeModal }) {
   }, []);
 
   const onInputChange = (e) => {
-    setExam({ ...exam, [e.target.name]: e.target.value });
+    setNewExam({ ...newExam, [e.target.name]: e.target.value });
   };
 
   const editExam = async (e, closeModal) => {
     e.preventDefault();
     try {
-      const response = await api.put(`/exam/${id}`, exam);
-      setExams(
-        exams.map((exam) =>
+      const response = await api.put(`/exam/${id}`, newExam);
+      setAllExams(
+        allExams.map((exam) =>
           //if not, we keep the Exam as it is because we didnt update it
           exam.idExam === id ? { ...response.data } : exam
         )
       );
-      setExam({ nameSubject: "", startDate: null, endDate: null, room: null });
+      setNewExam({
+        nameSubject: "",
+        startDate: null,
+        endDate: null,
+        room: null,
+      });
       closeModal();
     } catch (err) {
       console.log(`error: ${err.message}`);
@@ -85,7 +90,7 @@ function EditAgenda({ exams, setExams, id, closeModal }) {
                     id="subject-select"
                     className="form-select"
                     onChange={(e) =>
-                      setExam({ ...exam, nameSubject: e.target.value })
+                      setNewExam({ ...newExam, nameSubject: e.target.value })
                     }
                   >
                     <option value=""></option>
@@ -113,7 +118,7 @@ function EditAgenda({ exams, setExams, id, closeModal }) {
                     endDate={endDate}
                     timeClassName={handleTimeColor}
                     onChange={(startDate) =>
-                      setExam({ ...exam, startDate: startDate })
+                      setNewExam({ ...newExam, startDate: startDate })
                     }
                   />
                 </div>
@@ -130,8 +135,8 @@ function EditAgenda({ exams, setExams, id, closeModal }) {
                     minDate={startDate}
                     timeClassName={handleTimeColor}
                     onChange={(endDate) => {
-                      setExam({
-                        ...exam,
+                      setNewExam({
+                        ...newExam,
                         endDate: endDate,
                       });
                     }}
@@ -144,7 +149,9 @@ function EditAgenda({ exams, setExams, id, closeModal }) {
                   <select
                     id="room-select"
                     className="form-select"
-                    onChange={(e) => setExam({ ...exam, room: e.target.value })}
+                    onChange={(e) =>
+                      setNewExam({ ...newExam, room: e.target.value })
+                    }
                   >
                     <option value=""></option>
                     {rooms

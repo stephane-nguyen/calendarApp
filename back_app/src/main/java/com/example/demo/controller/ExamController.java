@@ -1,8 +1,5 @@
 package com.example.demo.controller;
 
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Exam;
+import com.example.demo.model.Subject;
 import com.example.demo.service.ExamService;
+import com.example.demo.service.SubjectService;
 
 @RestController
 @RequestMapping("/api")
@@ -26,6 +25,8 @@ import com.example.demo.service.ExamService;
 public class ExamController {
 	@Autowired
 	private ExamService examService;
+	@Autowired
+	private SubjectService subjectService;
 
 	@GetMapping("/exam")
 	public ResponseEntity<List<Exam>> getAllExam() {
@@ -34,10 +35,12 @@ public class ExamController {
 
 	@PostMapping("/exam")
 	public ResponseEntity<Exam> createExam(@RequestBody Exam exam) {
-		// Date date = new Date();
-		// Exam exam = new Exam(date, 1, 2, 3);
-
 		return ResponseEntity.ok().body(this.examService.createExam(exam));
+	}
+
+	@GetMapping("/examSubject/{idSubjectExam}")
+	public ResponseEntity<String> getSubjectExam(@PathVariable Integer idSubjectExam) {
+		return ResponseEntity.ok().body(subjectService.getSubjectById(idSubjectExam).getNameSubject());
 	}
 
 	@DeleteMapping("/exam/{id}")

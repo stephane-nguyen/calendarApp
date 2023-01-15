@@ -45,7 +45,7 @@ const localizer = dateFnsLocalizer({
 
 function Agenda() {
   //DATA
-  const [exams, setExams] = useState([]);
+  const [allExams, setAllExams] = useState([]);
 
   const [id, setId] = useState(null);
 
@@ -57,7 +57,7 @@ function Agenda() {
     const getAllExams = async () => {
       try {
         const response = await api.get("/exam");
-        setExams(response.data);
+        setAllExams(response.data);
       } catch (err) {
         //not in 200 range status code
         if (err.response) {
@@ -72,10 +72,41 @@ function Agenda() {
     getAllExams();
   }, []);
 
+  /**
+   * DB has different attributes for Calendar events property.
+   * We create here a new array with the right attributes
+   */
+  const [calendarEvents, setCalendarEvents] = useState([]);
+
+  useEffect(() => {
+    const getSubjectNameFromSubjectId = async (id) => {
+      const res = await api.get(`/examSubject/${id}`);
+      return res.data;
+    };
+
+    const createCalendarEvents = async () => {
+      const promises = allExams.map(async (exam) => {
+        const subjectName = await getSubjectNameFromSubjectId(
+          exam.subjects_id_subjects
+        );
+        return {
+          title: subjectName,
+          start: new Date(exam.startDate),
+          end: new Date(exam.endDate),
+        };
+      });
+
+      const events = await Promise.all(promises);
+      setCalendarEvents(events);
+    };
+
+    createCalendarEvents();
+  }, [allExams]);
+
   const deleteExam = async (id) => {
     try {
       await api.delete(`exam/${id}`);
-      setExams(exams.filter((exam) => exam.id !== id));
+      setAllExams(allExams.filter((exam) => exam.id !== id));
     } catch (err) {
       console.log(`error: ${err.message}`);
     }
@@ -93,15 +124,15 @@ function Agenda() {
 
         <Modal open={isAddExamOpen}>
           <AddExam
-            exams={exams}
-            setExams={setExams}
+            allExams={allExams}
+            setExams={setAllExams}
             closeModal={() => setIsAddExamOpen(false)}
           />
         </Modal>
         <Modal open={isEditExamOpen}>
           <EditAgenda
-            exams={exams}
-            setExams={setExams}
+            exams={allExams}
+            setExams={setAllExams}
             id={id}
             closeModal={() => setIsEditExamOpen(false)}
           />
@@ -110,14 +141,13 @@ function Agenda() {
 
       <Calendar
         localizer={localizer}
-        //events={events}
-        events={exams}
+        events={calendarEvents}
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500, margin: "50px" }}
       />
       <ExamList
-        exams={exams}
+        exams={allExams}
         setId={setId}
         setIsEditExamOpen={setIsEditExamOpen}
         deleteExam={deleteExam}

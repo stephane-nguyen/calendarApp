@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import api from "../../api/baseURL";
-import { parseISO, format } from "date-fns";
+import { format } from "date-fns";
 import { handleTimeColor } from "../Agenda";
 
-const AddExam = ({ exams, setExams, closeModal }) => {
-  const [exam, setExam] = useState({
+const AddExam = ({ allExams, setAllExams, closeModal }) => {
+  const [newExam, setNewExam] = useState({
     nameSubject: "",
-    startDate: null,
-    endDate: null,
-    room: null,
+    startDate: "",
+    endDate: "",
+    room: "",
+    stringstartDateDate: "",
+    stringEndDate: "",
   });
 
   const [subjects, setSubjects] = useState([]);
   const [rooms, setRooms] = useState([]);
-
-  const { nameSubject, startDate, endDate, room } = exam;
 
   useEffect(() => {
     const getAllSubjects = async () => {
@@ -50,13 +50,29 @@ const AddExam = ({ exams, setExams, closeModal }) => {
     loadRooms();
   }, []);
 
+  const {
+    nameSubject,
+    startDate,
+    endDate,
+    room,
+    stringstartDateDate,
+    stringEndDate,
+  } = newExam;
+
   const addExam = async (e, closeModal) => {
     e.preventDefault();
     try {
-      const response = await api.post("/exam", exam);
-      console.log(response);
-      setExams([...exams, response.data]);
-      setExam({ nameSubject: "", startDate: null, endDate: null, room: null });
+      const response = await api.post("/exam", newExam);
+      console.log(response.data);
+      setAllExams([...allExams, response.data]);
+      setNewExam({
+        nameSubject: "",
+        startDate: "",
+        endDate: "",
+        room: "",
+        stringStartDate: "",
+        stringEndDate: "",
+      });
       closeModal();
     } catch (error) {
       console.log(`error: ${error.message}`);
@@ -77,15 +93,15 @@ const AddExam = ({ exams, setExams, closeModal }) => {
                   <select
                     id="subject-select"
                     className="form-select"
-                    onChange={(e) =>
-                      setExam({ ...exam, nameSubject: e.target.value })
-                    }
+                    onChange={(e) => {
+                      setNewExam({ ...newExam, nameSubject: e.target.value });
+                    }}
                   >
                     <option value=""></option>
-                    {subjects
+                    {subjects.length > 0
                       ? subjects.map((subject) => (
                           <option
-                            key={subject.nameSubject}
+                            key={subject.idSubject}
                             value={subject.nameSubject}
                           >
                             {subject.nameSubject}
@@ -105,9 +121,16 @@ const AddExam = ({ exams, setExams, closeModal }) => {
                     selectsStart
                     endDate={endDate}
                     timeClassName={handleTimeColor}
-                    onChange={(startDate) =>
-                      setExam({ ...exam, startDate: startDate })
-                    }
+                    onChange={(startDate) => {
+                      setNewExam({
+                        ...newExam,
+                        startDate: startDate,
+                        stringStartDate: format(
+                          startDate,
+                          "yyyy-MM-dd HH:mm:ss"
+                        ),
+                      });
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -131,9 +154,10 @@ const AddExam = ({ exams, setExams, closeModal }) => {
                         new Date(format(endDate, "yyyy-MM-dd HH:mm:ss"))
                       );
 
-                      setExam({
-                        ...exam,
+                      setNewExam({
+                        ...newExam,
                         endDate: endDate,
+                        stringEndDate: format(endDate, "yyyy-MM-dd HH:mm:ss"),
                       });
                     }}
                   />
@@ -145,10 +169,12 @@ const AddExam = ({ exams, setExams, closeModal }) => {
                   <select
                     id="room-select"
                     className="form-select"
-                    onChange={(e) => setExam({ ...exam, room: e.target.value })}
+                    onChange={(e) => {
+                      setNewExam({ ...newExam, room: e.target.value });
+                    }}
                   >
                     <option value=""></option>
-                    {rooms
+                    {rooms.length > 0
                       ? rooms.map((room) => (
                           <option key={room.idRoom} value={room.idRoom}>
                             {room.idRoom}
