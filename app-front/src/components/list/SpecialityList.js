@@ -19,6 +19,7 @@ const SpecialityList = ({
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
+            <th>Speciality Id</th>
             <th>Speciality Name</th>
             <th>Actions</th>
           </tr>
@@ -26,6 +27,7 @@ const SpecialityList = ({
         <tbody>
           {specialities.map((speciality) => (
             <tr key={speciality.idSpeciality}>
+              <td>{speciality.idSpeciality}</td>
               <td>{speciality.nameSpeciality}</td>
               <td>
                 {/* action buttons */}
