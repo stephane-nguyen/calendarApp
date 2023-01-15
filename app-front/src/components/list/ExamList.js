@@ -1,42 +1,33 @@
 import React from "react";
 
-const SubjectList = ({
-  subjects,
-  setId,
-  setIsAddOpen,
-  setIsEditOpen,
-  deleteSubject,
-}) => {
+function ExamList({ exams, setId, setIsEditExamOpen, deleteExam }) {
   return (
-    <div className="container">
-      <h2 className="text-center">List of Subjects</h2>
-      <button
-        className="btn btn-primary mb-2"
-        onClick={() => setIsAddOpen(true)}
-      >
-        Add Subject
-      </button>
+    <div className="container mt-1">
+      <h2 className="text-center">List of Exams</h2>
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Subject Id</th>
-            <th>Subject Name</th>
+            <th>Room</th>
+            <th>startDate</th>
+            <th>endDate</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {subjects.map((subject) => (
-            <tr key={subject.idSubject}>
-              <td>{subject.idSubject}</td>
-              <td>{subject.nameSubject}</td>
+          {exams.map((exam) => (
+            <tr key={exam.id_exam}>
+              <td>{exam.subjects_id_subjects}</td>
+              <td>{exam.room_id_room}</td>
+              <td>{new Date(exam.startDate).toLocaleString()}</td>
+              <td>{new Date(exam.endDate).toLocaleString()}</td>
               <td>
-                {/* action buttons */}
                 <ul className="list-inline m-0">
                   <li className="list-inline-item">
                     <button
                       onClick={() => {
-                        setId(subject.idSubject);
-                        setIsEditOpen(true);
+                        setId(exam.id_exam);
+                        setIsEditExamOpen(true);
                       }}
                       className="btn btn-success btn-sm rounded-0"
                       type="button"
@@ -49,7 +40,7 @@ const SubjectList = ({
                   </li>
                   <li className="list-inline-item">
                     <button
-                      onClick={() => deleteSubject(subject.idSubject)}
+                      onClick={() => deleteExam(exam.id_exam)}
                       className="btn btn-danger btn-sm rounded-0"
                       type="button"
                       data-toggle="tooltip"
@@ -67,6 +58,6 @@ const SubjectList = ({
       </table>
     </div>
   );
-};
+}
 
-export default SubjectList;
+export default ExamList;

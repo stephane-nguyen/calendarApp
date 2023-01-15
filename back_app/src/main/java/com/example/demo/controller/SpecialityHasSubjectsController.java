@@ -55,7 +55,7 @@ public class SpecialityHasSubjectsController {
 	public ResponseEntity<List<Speciality>> getSpecialityBySubject(@PathVariable Integer idSubject){
 		List<Speciality> list = new ArrayList<>();
 		
-		this.specialityHasSubjectsService.getSpecialityBySubject(idSubject).forEach(e -> list.add( this.specialityService.getSpeciality(e.getSpecialityIdSpeciality())));
+		this.specialityHasSubjectsService.getSpecialityBySubject(idSubject).forEach(e -> list.add( this.specialityService.getSpecialityById(e.getSpecialityIdSpeciality())));
 		
 		return ResponseEntity.ok().body(list);
 		

@@ -49,12 +49,12 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/student")
-	public ResponseEntity<List<User>> getAllStudents() {
+	public ResponseEntity<List<User>> getAllStudent() {
 		return ResponseEntity.ok().body(userService.getUsersByRole(1));
 	}
 
 	@GetMapping(value = "/teacher")
-	public ResponseEntity<List<User>> getAllTeachers() {
+	public ResponseEntity<List<User>> getAllTeacher() {
 		return ResponseEntity.ok().body(userService.getUsersByRole(2));
 	}
 

@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import api from "../api/baseURL";
 
-import AddSubject from "./add/AddSubject";
-import EditSubject from "./edit/EditSubject";
-import SubjectList from "./list/SubjectList";
+import AddSpeciality from "./add/AddSpeciality";
+import EditSpeciality from "./edit/EditSpeciality";
+import SpecialityList from "./list/SpecialityList";
 import Modal from "./Modal";
 
-const Subject = () => {
-  const [subjects, setSubjects] = useState([]);
+const Speciality = () => {
+  const [specialities, setSpecialities] = useState([]);
   const [id, setId] = useState(null);
 
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   useEffect(() => {
-    const getAllSubjects = async () => {
+    const getAllSpecialities = async () => {
       try {
-        const response = await api.get("/subject");
-        setSubjects(response.data);
+        const response = await api.get("/speciality");
+        setSpecialities(response.data);
       } catch (err) {
         //not in 200 range status code
         if (err.response) {
@@ -29,13 +29,13 @@ const Subject = () => {
         }
       }
     };
-    getAllSubjects();
-  }, [subjects]);
+    getAllSpecialities();
+  }, [specialities]);
 
-  const deleteSubject = async (id) => {
+  const deleteSpeciality = async (id) => {
     try {
-      await api.delete(`subject/${id}`);
-      setSubjects(subjects.filter((subject) => subject.idSubject !== id));
+      await api.delete(`speciality/${id}`);
+      setSpecialities(specialities.filter((speciality) => speciality.idSpeciality !== id));
     } catch (err) {
       console.log(`error: ${err.message}`);
     }
@@ -44,9 +44,9 @@ const Subject = () => {
   return (
     <>
       <Modal open={isAddOpen}>
-        <AddSubject
-          subjects={subjects}
-          setSubjects={setSubjects}
+        <AddSpeciality
+          specialities={specialities}
+          setSpecialities={setSpecialities}
           closeModal={() => {
             setIsAddOpen(false);
           }}
@@ -54,23 +54,23 @@ const Subject = () => {
       </Modal>
 
       <Modal open={isEditOpen}>
-        <EditSubject
-          subjects={subjects}
-          setSubjects={setSubjects}
+        <EditSpeciality
+          specialities={specialities}
+          setSpecialities={setSpecialities}
           id={id}
           closeModal={() => setIsEditOpen(false)}
         />
       </Modal>
 
-      <SubjectList
-        subjects={subjects}
+      <SpecialityList
+        specialities={specialities}
         setId={setId}
         setIsAddOpen={setIsAddOpen}
         setIsEditOpen={setIsEditOpen}
-        deleteSubject={deleteSubject}
+        deleteSpeciality={deleteSpeciality}
       />
     </>
   );
 };
 
-export default Subject;
+export default Speciality;

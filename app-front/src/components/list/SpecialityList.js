@@ -1,41 +1,41 @@
 import React from "react";
 
-const SubjectList = ({
-  subjects,
+const SpecialityList = ({
+  specialities,
   setId,
   setIsAddOpen,
   setIsEditOpen,
-  deleteSubject,
+  deleteSpeciality,
 }) => {
   return (
     <div className="container">
-      <h2 className="text-center">List of Subjects</h2>
+      <h2 className="text-center">List of Speciality</h2>
       <button
         className="btn btn-primary mb-2"
         onClick={() => setIsAddOpen(true)}
       >
-        Add Subject
+        Add Speciality
       </button>
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Subject Id</th>
-            <th>Subject Name</th>
+            <th>Speciality Id</th>
+            <th>Speciality Name</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {subjects.map((subject) => (
-            <tr key={subject.idSubject}>
-              <td>{subject.idSubject}</td>
-              <td>{subject.nameSubject}</td>
+          {specialities.map((speciality) => (
+            <tr key={speciality.idSpeciality}>
+              <td>{speciality.idSpeciality}</td>
+              <td>{speciality.nameSpeciality}</td>
               <td>
                 {/* action buttons */}
                 <ul className="list-inline m-0">
                   <li className="list-inline-item">
                     <button
                       onClick={() => {
-                        setId(subject.idSubject);
+                        setId(speciality.idSpeciality);
                         setIsEditOpen(true);
                       }}
                       className="btn btn-success btn-sm rounded-0"
@@ -49,7 +49,7 @@ const SubjectList = ({
                   </li>
                   <li className="list-inline-item">
                     <button
-                      onClick={() => deleteSubject(subject.idSubject)}
+                      onClick={() => deleteSpeciality(speciality.idSpeciality)}
                       className="btn btn-danger btn-sm rounded-0"
                       type="button"
                       data-toggle="tooltip"
@@ -69,4 +69,4 @@ const SubjectList = ({
   );
 };
 
-export default SubjectList;
+export default SpecialityList;
