@@ -28,10 +28,10 @@ public class RoomController {
 	public ResponseEntity<List<Room>> getAllRoom(){
 		return ResponseEntity.ok().body(roomService.getAllRoom());
 	}
+	
 	@PostMapping("/room")
 	public ResponseEntity<Room> createRoom(@RequestBody Room room){
-		//@RequestBody Room room
-		//Room room = new Room(35);
+		System.out.println(room.toString());
 		return ResponseEntity.ok().body(this.roomService.createRoom(room));
 	}
 	@DeleteMapping("/room/{id}")

@@ -1,8 +1,5 @@
 package com.example.demo.controller;
 
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +33,10 @@ public class ExamController {
 	public ResponseEntity<Exam> createExam(@RequestBody Exam exam) {
 		// Date date = new Date();
 		// Exam exam = new Exam(date, 1, 2, 3);
-
-		return ResponseEntity.ok().body(this.examService.createExam(exam));
+		
+		System.out.println(exam.toString());
+		return null;
+//		return ResponseEntity.ok().body(this.examService.createExam(exam));
 	}
 
 	@DeleteMapping("/exam/{id}")

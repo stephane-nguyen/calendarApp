@@ -38,4 +38,12 @@ public class Room implements Serializable{
 	public void setCapacity(Integer capacity){
 		this.capacity = capacity;
 	}
+	
+	@Override
+	public String toString() {
+		return "Room [id_room=" + id_room + ", capacity=" + capacity + "]";
+	}
+	
+	
 }
+

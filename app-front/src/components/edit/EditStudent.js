@@ -20,7 +20,6 @@ export default function EditStudent() {
   };
 
   useEffect(() => {
-<<<<<<< HEAD:app-front/src/components/edit/EditStudent.js
     const loadStudent = async () => {
       const result = await api.get(`/user/${id}`);
       setStudent(result.data);
@@ -32,19 +31,6 @@ export default function EditStudent() {
     e.preventDefault();
     await api.put(`user/${id}`, student);
     navigate("/student");
-=======
-    const loadUser = async () => {
-      const result = await api.get(`/user/${id}`);
-      setUser(result.data);
-    };
-    loadUser();
-  }, [id]);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await api.put(`user/${id}`, user);
-    navigate("/user");
->>>>>>> feature-exam:app-front/src/components/edit/EditUser.js
   };
 
   return (
