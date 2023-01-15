@@ -19,8 +19,8 @@ function ExamList({ exams, setId, setIsEditExamOpen, deleteExam }) {
             <tr key={exam.id_exam}>
               <td>{exam.subjects_id_subjects}</td>
               <td>{exam.room_id_room}</td>
-              <td>{exam.startDate}</td>
-              <td>{exam.endDate}</td>
+              <td>{new Date(exam.startDate).toLocaleString()}</td>
+              <td>{new Date(exam.endDate).toLocaleString()}</td>
               <td>
                 <ul className="list-inline m-0">
                   <li className="list-inline-item">
