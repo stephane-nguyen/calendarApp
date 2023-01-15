@@ -58,9 +58,7 @@ const Subject = () => {
           subjects={subjects}
           setSubjects={setSubjects}
           id={id}
-          closeModal={() => {
-            setIsEditOpen(false);
-          }}
+          closeModal={() => setIsEditOpen(false)}
         />
       </Modal>
 

@@ -4,11 +4,15 @@ import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import { getDay } from "date-fns";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
+import api from "../api/baseURL";
 import Modal from "./Modal";
+
+import AddExam from "./add/AddExam";
+import EditAgenda from "./edit/EditExam";
+import ExamList from "./list/ExamList";
 
 const locales = { "en-US": require("date-fns/locale/en-US") };
 
@@ -20,164 +24,111 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const events = [
-  {
-    title: "maths",
-    allDay: true,
-    start: new Date(),
-    end: new Date(2022, 12, 0),
-  },
-  {
-    title: "histoire",
-    start: new Date(2023, 1, 3),
-    end: new Date(2023, 1, 6),
-  },
-  {
-    title: "français",
-    start: new Date(2022, 12, 0),
-    end: new Date(2022, 12, 0),
-  },
-];
+// const events = [
+//   {
+//     title: "maths",
+//     allDay: true,
+//     start: new Date(),
+//     end: new Date(2022, 12, 0),
+//   },
+//   {
+//     title: "histoire",
+//     start: new Date(2023, 1, 3),
+//     end: new Date(2023, 1, 6),
+//   },
+//   {
+//     title: "français",
+//     start: new Date(2022, 12, 0),
+//     end: new Date(2022, 12, 0),
+//   },
+// ];
 
-/* STYLE */
-const BUTTON_WRAPPER_STYLES = {
-  position: "relative",
-  zIndex: 1,
-};
+function Agenda() {
+  //DATA
+  const [exams, setExams] = useState([]);
 
-const Agenda = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [id, setId] = useState(null);
 
-  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+  //MODAL
+  const [isAddExamOpen, setIsAddExamOpen] = useState(false);
+  const [isEditExamOpen, setIsEditExamOpen] = useState(false);
 
-  const [allEvents, setAllEvents] = useState(events);
+  useEffect(() => {
+    const getAllExams = async () => {
+      try {
+        const response = await api.get("/exam");
+        setExams(response.data);
+      } catch (err) {
+        //not in 200 range status code
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else {
+          console.log(`error: ${err.message}`);
+        }
+      }
+    };
+    getAllExams();
+  }, []);
 
-  /* CRUD */
-
-  const addEvent = (e) => {
-    e.preventDefault();
-    setAllEvents([...allEvents, newEvent]);
-    setIsOpen(false);
+  const deleteExam = async (id) => {
+    try {
+      await api.delete(`exam/${id}`);
+      setExams(exams.filter((exam) => exam.id !== id));
+    } catch (err) {
+      console.log(`error: ${err.message}`);
+    }
   };
 
   return (
     <>
-      <div style={BUTTON_WRAPPER_STYLES}>
-        <div className="text-center">
-          <button
-            className="btn btn-primary ml-3 mt-1"
-            onClick={() => setIsOpen(true)}
-          >
-            Add Event
-          </button>
-        </div>
-        <Modal open={isOpen}>
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-md-6">
-                <div className="card">
-                  <h3 className="card-header text-center">Add new event</h3>
-                  <div className="card-body">
-                    <form>
-                      <div className="form-group">
-                        <label htmlFor="title" className="form-label">
-                          Title
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Add title"
-                          name="title"
-                          className="form-control"
-                          value={newEvent.title}
-                          onChange={(e) =>
-                            setNewEvent({ ...newEvent, title: e.target.value })
-                          }
-                        />
-                      </div>
-                      <div className="form-group">
-                        <DatePicker
-                          placeholderText="Start date"
-                          showTimeSelect
-                          timeFormat="HH:mm"
-                          dateFormat="MMMM d, yyyy h:mm aa"
-                          selected={newEvent.start}
-                          onChange={(start) =>
-                            setNewEvent({ ...newEvent, start: start })
-                          }
-                        />
-                      </div>
-                      <div className="form-group">
-                        <DatePicker
-                          placeholderText="End date"
-                          showTimeSelect
-                          timeFormat="HH:mm"
-                          dateFormat="MMMM d, yyyy h:mm aa"
-                          selected={newEvent.end}
-                          onChange={(end) =>
-                            setNewEvent({ ...newEvent, end: end })
-                          }
-                        />
-                      </div>
+      <div className="text-center">
+        <button
+          className="btn btn-primary mt-3"
+          onClick={() => setIsAddExamOpen(true)}
+        >
+          Add Exam
+        </button>
 
-                      <button
-                        className="btn btn-primary btn-block"
-                        onClick={(e) => addEvent(e)}
-                      >
-                        Add
-                      </button>
-                      <button
-                        className="btn btn-danger btn-block"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Cancel
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <Modal open={isAddExamOpen}>
+          <AddExam
+            exams={exams}
+            setExams={setExams}
+            closeModal={() => setIsAddExamOpen(false)}
+          />
+        </Modal>
+        <Modal open={isEditExamOpen}>
+          <EditAgenda
+            exams={exams}
+            setExams={setExams}
+            id={id}
+            closeModal={() => setIsEditExamOpen(false)}
+          />
         </Modal>
       </div>
 
       <Calendar
         localizer={localizer}
-        events={allEvents}
+        //events={events}
+        events={exams}
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500, margin: "50px" }}
       />
-      <div className="container mt-1">
-        <h2 className="text-center">List of exams</h2>
-        {/* <table className="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allEvents.map((event) => (
-              <tr key={event.id}>
-                <td>{event.title}</td>
-                <td>{event.start}</td>
-                <td>{event.end}</td>
-                <td>
-                  <Link to={`/event/${event.id}`}>
-                    <button className="btn btn-primary">
-                      <i className="fas fa-edit" /> Edit
-                    </button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
-      </div>
+      <ExamList
+        exams={exams}
+        setId={setId}
+        setIsEditExamOpen={setIsEditExamOpen}
+        deleteExam={deleteExam}
+      />
     </>
   );
-};
+}
 
 export default Agenda;
+export function handleTimeColor(time) {
+  return time.getHours() > 7 && time.getHours() < 17
+    ? "text-success"
+    : "text-error";
+}

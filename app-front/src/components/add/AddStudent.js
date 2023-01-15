@@ -20,8 +20,17 @@ export default function AddStudent() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD:app-front/src/components/add/AddStudent.js
     await api.post("/user", student);
     navigate("/student");
+=======
+    try {
+      await api.post("/user", user);
+      navigate("/user");
+    } catch (error) {
+      console.log(`error: ${error.message}`);
+    }
+>>>>>>> feature-exam:app-front/src/components/add/AddUser.js
   };
 
   return (
