@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
@@ -18,27 +19,31 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User createUser(@RequestBody User user) {
+	public User createUser(User user) {
 		user.setRole(1);
 		return this.userRepository.save(user);
 	}
 
-	public User updateUser(@RequestBody User user) {
+	public User updateUser(User user) {
 
 		Optional<User> userDb = this.userRepository.findById(user.getIdUser());
-		User userUpdate = userDb.get();
-		userUpdate.setIdUser(user.getIdUser());
-		userUpdate.setFirstname(user.getFirstname());
-		userUpdate.setLastname(user.getLastname());
-		userUpdate.setEmail(user.getEmail());
-		userUpdate.setPassword(user.getPassword());
-		userUpdate.setRole(user.getRole());
-		userRepository.save(userUpdate);
-
-		return userUpdate;
-
+		
+		if(userDb.isPresent()) {
+			User userUpdate = userDb.get();
+			userUpdate.setIdUser(user.getIdUser());
+			userUpdate.setFirstname(user.getFirstname());
+			userUpdate.setLastname(user.getLastname());
+			userUpdate.setEmail(user.getEmail());
+			userUpdate.setPassword(user.getPassword());
+			userUpdate.setRole(user.getRole());
+			userRepository.save(userUpdate);
+			
+			return userUpdate;
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + user.getIdUser());
+		}
+		
 	}
-
 	public List<User> getAllUser() {
 		return this.userRepository.findAll();
 	}
@@ -48,11 +53,26 @@ public class UserService {
 	}
 
 	public User getUserById(Integer userId) {
-		return this.userRepository.findById(userId).get();
+		
+		Optional<User> userDb = this.userRepository.findById(userId);
+		
+		if(userDb.isPresent()) {
+			return userDb.get();
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + userId);
+		}		
 	}
 
-	public void deleteUser(Integer id) {
-		this.userRepository.deleteById(id);
+	public void deleteUser(Integer userId) {
+		Optional<User> userDb = this.userRepository.findById(userId);
+		
+		if(userDb.isPresent()) {
+			this.userRepository.delete(userDb.get());
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + userId);
+
+		}
+
 	}
 
 }

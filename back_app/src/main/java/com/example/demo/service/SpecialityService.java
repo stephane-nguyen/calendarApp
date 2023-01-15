@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Speciality;
 import com.example.demo.repository.SpecialityRepository;
 
@@ -21,23 +23,43 @@ public class SpecialityService {
 	}
 	
 	public Speciality updateSpeciality(Speciality speciality) {
-		Speciality specialityUpdated = this.specialityRepository.findById(speciality.getIdSpeciality()).get();
-		specialityUpdated.setIdSpeciality(speciality.getIdSpeciality());
-		specialityUpdated.setNameSpeciality(speciality.getNameSpeciality());
+		Optional<Speciality> specialityDb = this.specialityRepository.findById(speciality.getIdSpeciality());
 		
-		return specialityUpdated;
-	}
-	
-	public void deleteSpeciality(Integer id) {
-		this.specialityRepository.deleteById(id);
-	}
-	
-	public Speciality getSpeciality(Integer id) {
-		return this.specialityRepository.findById(id).get();
+		if(specialityDb.isPresent()) {
+			Speciality specialityUpdate = specialityDb.get();
+			
+			specialityUpdate.setIdSpeciality(speciality.getIdSpeciality());
+			specialityUpdate.setNameSpeciality(speciality.getNameSpeciality());
+			
+			return specialityUpdate;
+			
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + speciality.getIdSpeciality());
+		}	
 	}
 	
 	public List<Speciality> getAllSpeciality(){
 		return this.specialityRepository.findAll();
 	}
+
+	public Speciality getSpecialityById(Integer specialityId) {
+		Optional<Speciality> specialityDb = this.specialityRepository.findById(specialityId);
+		
+		if(specialityDb.isPresent()) {
+			return specialityDb.get();
+			
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + specialityId);
+		}
+	}
 	
+	public void deleteSpeciality(Integer specialityId) {
+		Optional<Speciality> specialityDb = this.specialityRepository.findById(specialityId);
+		
+		if(specialityDb.isPresent()) {
+			this.specialityRepository.delete(specialityDb.get());
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + specialityId);
+		}
+	}
 }

@@ -48,7 +48,7 @@ public class SpecialityController {
 	
 	@GetMapping("/speciality/{id}")
 	public @ResponseBody ResponseEntity<Speciality> getSpeciality(@PathVariable Integer id){
-		return ResponseEntity.ok().body(this.specialityService.getSpeciality(id));
+		return ResponseEntity.ok().body(this.specialityService.getSpecialityById(id));
 	}
 	
 	@GetMapping("/speciality")

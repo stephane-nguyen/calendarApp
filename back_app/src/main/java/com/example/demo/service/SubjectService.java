@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Subject;
 import com.example.demo.repository.SubjectRepository;
 @Service
@@ -23,24 +24,47 @@ public class SubjectService {
 
 	public Subject updateSubject(Subject subject) {
 		Optional<Subject> subjectDb = this.subjectRepository.findById(subject.getIdSubject());
-		Subject subjectUpdate = subjectDb.get();
-		subjectUpdate.setIdSubject(subject.getIdSubject());
-		subjectUpdate.setNameSubject(subject.getNameSubject());
-		subjectRepository.save(subjectUpdate);
 		
-		return subjectUpdate;
+		if(subjectDb.isPresent()) {
+			Subject subjectUpdate = subjectDb.get();
+			subjectUpdate.setIdSubject(subject.getIdSubject());
+			subjectUpdate.setNameSubject(subject.getNameSubject());
+			subjectRepository.save(subjectUpdate);
+			
+			return subjectUpdate;
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + subject.getIdSubject());
+		}
 	}
 	
-	public void deleteSubject(Integer id) {
-		this.subjectRepository.deleteById(id);
-	}
-
 	public List<Subject> getAllSubject() {
 		return this.subjectRepository.findAll();
 	}
-
+	
 	public Subject getSubjectById(Integer subjectId) {
-		return this.subjectRepository.findById(subjectId).get();
+		Optional<Subject> subjectDb = this.subjectRepository.findById(subjectId);
+		
+		if(subjectDb.isPresent()) {
+			return subjectDb.get();
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + subjectId);
+		}
 	}
+	
+	public void deleteSubject(Integer subjectId) {
+		Optional<Subject> subjectDb = this.subjectRepository.findById(subjectId);
+		
+		if(subjectDb.isPresent()) {
+			this.subjectRepository.delete(subjectDb.get());
+
+		} else {
+			throw new ResourceNotFoundException("Record not found with id : " + subjectId);
+
+		}
+		
+	}
+
+
+
 
 }
