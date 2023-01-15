@@ -18,7 +18,7 @@ import AddStudent from "./components/add/AddStudent";
 import EditStudent from "./components/edit/EditStudent";
 
 import AddTeacher from "./components/add/AddTeacher";
-import EditTeacher from "./components/edit/EditStudent";
+import EditTeacher from "./components/edit/EditTeacher";
 
 import AddSpeciality from "./components/add/AddSpeciality";
 import EditSpeciality from "./components/edit/EditSpeciality";

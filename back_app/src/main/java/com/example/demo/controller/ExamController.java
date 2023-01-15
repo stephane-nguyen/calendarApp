@@ -1,9 +1,5 @@
 package com.example.demo.controller;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> feature-exam
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +37,7 @@ public class ExamController {
 	public ResponseEntity<Exam> createExam(@RequestBody Exam exam) {
 		return ResponseEntity.ok().body(this.examService.createExam(exam));
 	}
-	@GetMapping("/examSubject/{idSubjectEx}")
-	public ResponseEntity<String> getSubjectExam(@PathVariable Integer idSubjectEx){
-		return ResponseEntity.ok().body(subjectService.getSubjectById(idSubjectEx).getNameSubject());
-	}
-
+	
 	@GetMapping("/examSubject/{idSubjectExam}")
 	public ResponseEntity<String> getSubjectExam(@PathVariable Integer idSubjectExam) {
 		return ResponseEntity.ok().body(subjectService.getSubjectById(idSubjectExam).getNameSubject());
