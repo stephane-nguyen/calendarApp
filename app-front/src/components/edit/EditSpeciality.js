@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../api/baseURL";
 
 const EditSpeciality = ({ specialities, setSpecialities, id, closeModal }) => {
   const [nameSpeciality, setNameSpeciality] = useState("");
+
+  /* Display data about the speciality selected */
+  useEffect(() => {
+    const fetchSpecialityNameById = async () => {
+      const speciality = await getSpecialityById(id);
+      setNameSpeciality(speciality.nameSpeciality);
+    };
+    fetchSpecialityNameById();
+  }, [id]);
+
+  const getSpecialityById = async (id) => {
+    try {
+      const res = await api.get(`/speciality/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(`error: ${err.message}`);
+    }
+  };
 
   const editSpeciality = async (e, closeModal) => {
     e.preventDefault();

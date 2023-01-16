@@ -16,6 +16,25 @@ function EditAgenda({ allExams, setAllExams, id, closeModal }) {
 
   const { nameSubject, startDate, endDate, room } = newExam;
 
+  /* Display data about the exam selected */
+  // useEffect(() => {
+  //   const fetchExamNameById = async () => {
+  //     const exam = await getExamById(id);
+  //     setNewExam(exam);
+  //   };
+  //   fetchExamNameById();
+  // }, [id]);
+
+  // const getExamById = async (id) => {
+  //   try {
+  //     const res = await api.get(`/exam/${id}`);
+  //     return res.data;
+  //   } catch (err) {
+  //     console.log(`error: ${err.message}`);
+  //   }
+  // };
+
+  /* Fetch data */
   useEffect(() => {
     const getAllSubjects = async () => {
       try {
@@ -48,10 +67,6 @@ function EditAgenda({ allExams, setAllExams, id, closeModal }) {
     getAllSubjects();
     loadRooms();
   }, []);
-
-  const onInputChange = (e) => {
-    setNewExam({ ...newExam, [e.target.name]: e.target.value });
-  };
 
   const editExam = async (e, closeModal) => {
     e.preventDefault();

@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../api/baseURL";
 
 const EditSubject = ({ subjects, setSubjects, id, closeModal }) => {
   const [nameSubject, setNameSubject] = useState("");
+
+  /* Display data about the subject selected */
+  useEffect(() => {
+    const fetchSubjectNameById = async () => {
+      const subject = await getSubjectById(id);
+      setNameSubject(subject.nameSubject);
+    };
+    fetchSubjectNameById();
+  }, [id]);
+
+  const getSubjectById = async (id) => {
+    try {
+      const res = await api.get(`/subject/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(`error: ${err.message}`);
+    }
+  };
 
   const editSubject = async (e, closeModal) => {
     e.preventDefault();
