@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 15 jan. 2023 à 21:33
+-- Généré le : lun. 16 jan. 2023 à 22:47
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequences` (
 --
 
 INSERT INTO `hibernate_sequences` (`sequence_name`, `next_val`) VALUES
-('default', 0);
+('default', 200);
 
 -- --------------------------------------------------------
 
@@ -130,7 +130,8 @@ CREATE TABLE IF NOT EXISTS `speciality` (
 INSERT INTO `speciality` (`id_speciality`, `name_speciality`) VALUES
 (1, 'Scientifique'),
 (2, 'Economique_et_Sociale'),
-(3, 'Literraire');
+(3, 'Literraire'),
+(102, 'Biologie');
 
 -- --------------------------------------------------------
 
@@ -159,19 +160,6 @@ INSERT INTO `speciality_has_subjects` (`speciality_id_speciality`, `subjects_id_
 (2, 3),
 (3, 3),
 (2, 4);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `student`
---
-
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE IF NOT EXISTS `student` (
-  `user_id_user` int(11) NOT NULL,
-  `id_student` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -221,20 +209,8 @@ INSERT INTO `subject` (`id_subject`, `name_subject`) VALUES
 (2, 'Francais'),
 (3, 'Histoire'),
 (4, 'SES'),
-(5, 'Physique');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `teacher`
---
-
-DROP TABLE IF EXISTS `teacher`;
-CREATE TABLE IF NOT EXISTS `teacher` (
-  `user_id_user` int(11) NOT NULL,
-  `id_teacher` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(5, 'Physique'),
+(52, 'Test & verification');
 
 -- --------------------------------------------------------
 
@@ -277,9 +253,10 @@ INSERT INTO `user` (`id_user`, `firstname`, `lastname`, `email`, `password`, `ro
 (1, 'Graci', 'TAPEUR', 'graci@tapeur.fr', 'gracita', 1),
 (2, 'Alex', 'Sansdrap', 'alex@sansdrap.fr', 'alexandre', 1),
 (3, 'Steph', 'anatik', 'Steph@anatik.fr', 'stephane', 1),
-(4, 'Jay-B', 'sy', 'jay-b@sy.fr', 'jb', 1),
-(9, 'isaac', 'newton', 'isaac@newton.fr', 'isaac', 1),
-(359, 'caca', 'fqsfdq', 'fsdqfsq', 'fqdqsfq', 1),
+(4, 'Jay-B', 'sy', 'jay-b@sy.fr', 'jb', 2),
+(5, 'Alex', 'Uy', 'alex.k@gmail.com', 'aaaaaaaaa', 1),
+(7, 'StephaneTeacher', 'NGUYEN', 'test@gmail.com', 'aaaaa', 1),
+(9, 'isaac', 'newton', 'isaac@newton.fr', 'isaac', 2),
 (360, 'Alexandreggfsd', 'UYgdsfgdsfdsqfqs', 'alexandre@gmail.com', 'fdsqfdsq', 2),
 (361, 'fsqdfqs', 'fqsfsq', 'fdqsfsq', 'fdqfsq', 1);
 
