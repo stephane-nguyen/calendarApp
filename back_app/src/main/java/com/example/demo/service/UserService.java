@@ -20,7 +20,6 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public User createUser(User user) {
-		user.setRole(1);
 		return this.userRepository.save(user);
 	}
 

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Exam;
-import com.example.demo.model.Subject;
 import com.example.demo.service.ExamService;
 import com.example.demo.service.SubjectService;
 

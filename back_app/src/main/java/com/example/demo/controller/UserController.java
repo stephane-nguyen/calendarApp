@@ -26,8 +26,15 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/user")
-	public ResponseEntity<User> createUser(@RequestBody User newUser) {
+	@PostMapping("/teacher")
+	public ResponseEntity<User> createTeacher(@RequestBody User newUser) {
+		newUser.setRole(2);
+		return ResponseEntity.ok().body(this.userService.createUser(newUser));
+	}
+	
+	@PostMapping("/student")
+	public ResponseEntity<User> createStudent(@RequestBody User newUser) {
+		newUser.setRole(1);
 		return ResponseEntity.ok().body(this.userService.createUser(newUser));
 	}
 

@@ -20,7 +20,7 @@ export default function AddStudent() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await api.post("/user", student);
+    await api.post("/student", student);
     navigate("/student");
   };
 
