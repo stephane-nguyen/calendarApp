@@ -24,11 +24,11 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<User> login(HttpServletResponse response) {
+	public ResponseEntity<User> login(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
 	//@RequestParam String username, @RequestParam String password,  HttpServletResponse response
 	//@RequestParam String username, @RequestParam String password, 
-	String username ="peeta@gore.fr";
-	String password = "pythagore";
+//	String username ="peeta@gore.fr";
+//	String password = "pythagore";
 	return ResponseEntity.ok().body(this.loginService.loginUser(username, password, response));
 	}
 	
