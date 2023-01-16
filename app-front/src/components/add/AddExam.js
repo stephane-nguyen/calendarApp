@@ -98,7 +98,7 @@ const AddExam = ({ allExams, setAllExams, closeModal }) => {
                     }}
                   >
                     <option value=""></option>
-                    {subjects.length > 0
+                    {subjects
                       ? subjects.map((subject) => (
                           <option
                             key={subject.idSubject}
@@ -174,7 +174,7 @@ const AddExam = ({ allExams, setAllExams, closeModal }) => {
                     }}
                   >
                     <option value=""></option>
-                    {rooms.length > 0
+                    {rooms
                       ? rooms.map((room) => (
                           <option key={room.idRoom} value={room.idRoom}>
                             {room.idRoom}
