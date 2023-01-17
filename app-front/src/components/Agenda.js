@@ -1,5 +1,4 @@
 import Modal from "./Modal";
-import { Link, useNavigate } from "react-router-dom";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
@@ -86,8 +85,6 @@ const events = [
 ];
 
 function Agenda() {
-  let navigate = useNavigate();
-
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
   const [allEvents, setAllEvents] = useState(events);
   const [isAddOpen, setIsAddOpen] = useState(false);
