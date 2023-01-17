@@ -6,14 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
+import lombok.AllArgsConstructor;
+
 @Service
 @Transactional
+@AllArgsConstructor
 public class UserService {
 
 	@Autowired
@@ -26,8 +28,8 @@ public class UserService {
 	public User updateUser(User user) {
 
 		Optional<User> userDb = this.userRepository.findById(user.getIdUser());
-		
-		if(userDb.isPresent()) {
+
+		if (userDb.isPresent()) {
 			User userUpdate = userDb.get();
 			userUpdate.setIdUser(user.getIdUser());
 			userUpdate.setFirstname(user.getFirstname());
@@ -36,13 +38,14 @@ public class UserService {
 			userUpdate.setPassword(user.getPassword());
 			userUpdate.setRole(user.getRole());
 			userRepository.save(userUpdate);
-			
+
 			return userUpdate;
 		} else {
 			throw new ResourceNotFoundException("Record not found with id : " + user.getIdUser());
 		}
-		
+
 	}
+
 	public List<User> getAllUser() {
 		return this.userRepository.findAll();
 	}
@@ -52,20 +55,20 @@ public class UserService {
 	}
 
 	public User getUserById(Integer userId) {
-		
+
 		Optional<User> userDb = this.userRepository.findById(userId);
-		
-		if(userDb.isPresent()) {
+
+		if (userDb.isPresent()) {
 			return userDb.get();
 		} else {
 			throw new ResourceNotFoundException("Record not found with id : " + userId);
-		}		
+		}
 	}
 
 	public void deleteUser(Integer userId) {
 		Optional<User> userDb = this.userRepository.findById(userId);
-		
-		if(userDb.isPresent()) {
+
+		if (userDb.isPresent()) {
 			this.userRepository.delete(userDb.get());
 		} else {
 			throw new ResourceNotFoundException("Record not found with id : " + userId);
