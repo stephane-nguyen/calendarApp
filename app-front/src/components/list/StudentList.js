@@ -10,7 +10,6 @@ const StudentList = ({ students, deleteStudent }) => {
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>id user</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
@@ -20,7 +19,6 @@ const StudentList = ({ students, deleteStudent }) => {
         <tbody>
           {students.map((student) => (
             <tr key={student.idUser}>
-              <td>{student.idUser}</td>
               <td>{student.firstname}</td>
               <td>{student.lastname}</td>
               <td>{student.email}</td>

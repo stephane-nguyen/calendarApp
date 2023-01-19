@@ -19,7 +19,6 @@ const SubjectList = ({
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Subject Id</th>
             <th>Subject Name</th>
             <th>Actions</th>
           </tr>
@@ -27,7 +26,6 @@ const SubjectList = ({
         <tbody>
           {subjects.map((subject) => (
             <tr key={subject.idSubject}>
-              <td>{subject.idSubject}</td>
               <td>{subject.nameSubject}</td>
               <td>
                 {/* action buttons */}
